@@ -125,23 +125,15 @@ const Index = () => {
         <div className="container py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  className="w-4 h-4 text-primary-foreground"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="12" cy="12" r="4" />
-                </svg>
-              </div>
-              <span className="font-semibold">MedMarket</span>
+              <img
+                src="/favicon.ico"
+                alt="DietCo"
+                className="h-9 w-9 rounded-xl"
+              />
+              <span className="font-semibold">DietCo</span>
             </div>
             <p className="text-sm text-muted-foreground text-center">
-              © 2024 MedMarket. Licensed healthcare marketplace serving Saudi Arabia.
+              © 2026 DietCo. Licensed healthcare marketplace serving Saudi Arabia.
             </p>
           </div>
         </div>
