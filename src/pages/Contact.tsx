@@ -5,9 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { useI18n } from "@/i18n";
 
 const Contact = () => {
+  const { t } = useI18n();
   const contactEmail = "orders@dietco.sa";
+  const contactPhone = "+966 11 000 0000";
   const whatsappNumber = "9661100000000";
 
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -20,16 +23,16 @@ const Contact = () => {
     const organization = String(data.get("organization") || "").trim();
     const message = String(data.get("message") || "").trim();
     const subject = encodeURIComponent(
-      `DietCo request${name ? ` - ${name}` : ""}`,
+      `${t("contact.email.subject")}${name ? ` - ${name}` : ""}`,
     );
     const body = encodeURIComponent(
       [
-        `Name: ${name || "-"}`,
-        `Email: ${email || "-"}`,
-        `Phone: ${phone || "-"}`,
-        `Organization: ${organization || "-"}`,
+        `${t("contact.email.name")}: ${name || "-"}`,
+        `${t("contact.email.email")}: ${email || "-"}`,
+        `${t("contact.email.phone")}: ${phone || "-"}`,
+        `${t("contact.email.organization")}: ${organization || "-"}`,
         "",
-        "Request details:",
+        `${t("contact.email.details")}:`,
         message || "-",
       ].join("\n"),
     );
@@ -46,10 +49,9 @@ const Contact = () => {
         <div className="grid gap-10 md:grid-cols-[1.05fr_1.2fr] items-start">
           <div className="space-y-6">
             <div>
-              <h1 className="text-foreground mb-3">Contact us</h1>
+              <h1 className="text-foreground mb-3">{t("contact.title")}</h1>
               <p className="text-muted-foreground text-lg max-w-md">
-                For complex orders, onboarding, or delivery coordination, reach
-                our team directly.
+                {t("contact.subtitle")}
               </p>
             </div>
 
@@ -60,11 +62,11 @@ const Contact = () => {
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-primary" />
-                <span>+966 11 000 0000</span>
+                <span>{contactPhone}</span>
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="h-4 w-4 text-primary" />
-                <span>Riyadh, Saudi Arabia</span>
+                <span>{t("contact.info.location")}</span>
               </div>
             </div>
 
@@ -74,61 +76,60 @@ const Contact = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                Message on WhatsApp
+                {t("contact.whatsapp")}
               </a>
             </Button>
           </div>
 
           <form className="card-clinical space-y-4" onSubmit={handleContactSubmit}>
             <div>
-              <h2 className="text-lg font-semibold mb-1">Request a quote</h2>
+              <h2 className="text-lg font-semibold mb-1">{t("contact.form.title")}</h2>
               <p className="text-sm text-muted-foreground">
-                Tell us what you need and we will respond within one business
-                day.
+                {t("contact.form.subtitle")}
               </p>
             </div>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <Label htmlFor="contact-name">Full name</Label>
-                <Input id="contact-name" name="name" placeholder="Full name" />
+                <Label htmlFor="contact-name">{t("contact.form.fields.name")}</Label>
+                <Input id="contact-name" name="name" placeholder={t("contact.form.placeholders.name")} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="contact-organization">Clinic / Company</Label>
+                <Label htmlFor="contact-organization">{t("contact.form.fields.organization")}</Label>
                 <Input
                   id="contact-organization"
                   name="organization"
-                  placeholder="Organization"
+                  placeholder={t("contact.form.placeholders.organization")}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="contact-email">Email</Label>
+                <Label htmlFor="contact-email">{t("contact.form.fields.email")}</Label>
                 <Input
                   id="contact-email"
                   name="email"
                   type="email"
-                  placeholder="name@clinic.sa"
+                  placeholder={t("contact.form.placeholders.email")}
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="contact-phone">Phone</Label>
+                <Label htmlFor="contact-phone">{t("contact.form.fields.phone")}</Label>
                 <Input
                   id="contact-phone"
                   name="phone"
                   type="tel"
-                  placeholder="+966 5X XXX XXXX"
+                  placeholder={t("contact.form.placeholders.phone")}
                 />
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="contact-message">Request details</Label>
+              <Label htmlFor="contact-message">{t("contact.form.fields.message")}</Label>
               <Textarea
                 id="contact-message"
                 name="message"
-                placeholder="Product names, quantities, and delivery timing."
+                placeholder={t("contact.form.placeholders.message")}
               />
             </div>
             <Button type="submit" variant="clinical" size="lg" className="w-full">
-              Send request
+              {t("contact.form.submit")}
             </Button>
           </form>
         </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useI18n } from "@/i18n";
 
 interface LocationData {
   address: string;
@@ -16,6 +17,7 @@ interface UseGoogleMapsProps {
 }
 
 export function useGoogleMaps({ apiKey, onLocationSelect }: UseGoogleMapsProps) {
+  const { t } = useI18n();
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const mapRef = useRef<any>(null);
@@ -30,7 +32,7 @@ export function useGoogleMaps({ apiKey, onLocationSelect }: UseGoogleMapsProps) 
 
   useEffect(() => {
     if (!apiKey) {
-      setError("Google Maps API key is required");
+      setError(t("address.errors.apiKeyRequired"));
       return;
     }
 
@@ -51,7 +53,7 @@ export function useGoogleMaps({ apiKey, onLocationSelect }: UseGoogleMapsProps) 
     };
     
     script.onerror = () => {
-      setError("Failed to load Google Maps");
+      setError(t("address.errors.loadFailed"));
     };
 
     document.head.appendChild(script);
@@ -59,7 +61,7 @@ export function useGoogleMaps({ apiKey, onLocationSelect }: UseGoogleMapsProps) 
     return () => {
       // Cleanup if needed
     };
-  }, [apiKey]);
+  }, [apiKey, t]);
 
   const extractLocationData = useCallback((place: any): LocationData => {
     const components = place.address_components || [];

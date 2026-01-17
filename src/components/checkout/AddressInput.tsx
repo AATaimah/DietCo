@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { MapPin, Navigation, Search } from "lucide-react";
+import { MapPin, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
 import { useGoogleMaps } from "@/hooks/useGoogleMaps";
+import { useI18n } from "@/i18n";
 
 interface LocationData {
   address: string;
@@ -33,6 +33,7 @@ interface AddressInputProps {
 }
 
 export function AddressInput({ apiKey, onChange }: AddressInputProps) {
+  const { t } = useI18n();
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [isMapInitialized, setIsMapInitialized] = useState(false);
@@ -83,7 +84,7 @@ export function AddressInput({ apiKey, onChange }: AddressInputProps) {
     <div className="space-y-6">
       <h3 className="font-semibold text-foreground flex items-center gap-2">
         <MapPin className="h-5 w-5 text-primary" />
-        Delivery Address
+        {t("address.title")}
       </h3>
 
       {/* Map Section */}
@@ -92,7 +93,7 @@ export function AddressInput({ apiKey, onChange }: AddressInputProps) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             ref={searchInputRef}
-            placeholder="Search for your address in Saudi Arabia..."
+            placeholder={t("address.searchPlaceholder")}
             className="pl-10"
             disabled={!isLoaded}
           />
@@ -106,7 +107,9 @@ export function AddressInput({ apiKey, onChange }: AddressInputProps) {
             <div className="w-full h-full flex items-center justify-center">
               <div className="text-center">
                 <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-2" />
-                <p className="text-sm text-muted-foreground">Loading map...</p>
+                <p className="text-sm text-muted-foreground">
+                  {t("address.loadingMap")}
+                </p>
               </div>
             </div>
           )}
@@ -118,27 +121,27 @@ export function AddressInput({ apiKey, onChange }: AddressInputProps) {
         </div>
 
         <p className="text-xs text-muted-foreground">
-          Click on the map or drag the marker to set your exact delivery location
+          {t("address.mapHint")}
         </p>
       </div>
 
       {/* Contact Details */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <Label htmlFor="fullName">Full Name *</Label>
+          <Label htmlFor="fullName">{t("address.fields.fullName")}</Label>
           <Input
             id="fullName"
-            placeholder="Enter your full name"
+            placeholder={t("address.placeholders.fullName")}
             value={details.fullName}
             onChange={(e) => handleChange("fullName", e.target.value)}
             className="mt-1.5"
           />
         </div>
         <div>
-          <Label htmlFor="phone">Phone Number *</Label>
+          <Label htmlFor="phone">{t("address.fields.phone")}</Label>
           <Input
             id="phone"
-            placeholder="+966 5x xxx xxxx"
+            placeholder={t("address.placeholders.phone")}
             value={details.phone}
             onChange={(e) => handleChange("phone", e.target.value)}
             className="mt-1.5"
@@ -149,10 +152,10 @@ export function AddressInput({ apiKey, onChange }: AddressInputProps) {
       {/* Address Details */}
       <div className="space-y-4">
         <div>
-          <Label htmlFor="address">Street Address *</Label>
+          <Label htmlFor="address">{t("address.fields.address")}</Label>
           <Input
             id="address"
-            placeholder="Building number, street name"
+            placeholder={t("address.placeholders.address")}
             value={details.address}
             onChange={(e) => handleChange("address", e.target.value)}
             className="mt-1.5"
@@ -161,30 +164,30 @@ export function AddressInput({ apiKey, onChange }: AddressInputProps) {
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div>
-            <Label htmlFor="city">City *</Label>
+            <Label htmlFor="city">{t("address.fields.city")}</Label>
             <Input
               id="city"
-              placeholder="e.g., Riyadh"
+              placeholder={t("address.placeholders.city")}
               value={details.city}
               onChange={(e) => handleChange("city", e.target.value)}
               className="mt-1.5"
             />
           </div>
           <div>
-            <Label htmlFor="district">District</Label>
+            <Label htmlFor="district">{t("address.fields.district")}</Label>
             <Input
               id="district"
-              placeholder="e.g., Al Olaya"
+              placeholder={t("address.placeholders.district")}
               value={details.district}
               onChange={(e) => handleChange("district", e.target.value)}
               className="mt-1.5"
             />
           </div>
           <div>
-            <Label htmlFor="postalCode">Postal Code</Label>
+            <Label htmlFor="postalCode">{t("address.fields.postalCode")}</Label>
             <Input
               id="postalCode"
-              placeholder="e.g., 12345"
+              placeholder={t("address.placeholders.postalCode")}
               value={details.postalCode}
               onChange={(e) => handleChange("postalCode", e.target.value)}
               className="mt-1.5"
@@ -193,10 +196,10 @@ export function AddressInput({ apiKey, onChange }: AddressInputProps) {
         </div>
 
         <div>
-          <Label htmlFor="additionalNotes">Delivery Notes (Optional)</Label>
+          <Label htmlFor="additionalNotes">{t("address.fields.notes")}</Label>
           <Input
             id="additionalNotes"
-            placeholder="Gate code, landmark, special instructions..."
+            placeholder={t("address.placeholders.notes")}
             value={details.additionalNotes}
             onChange={(e) => handleChange("additionalNotes", e.target.value)}
             className="mt-1.5"

@@ -1,6 +1,7 @@
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartItemType } from "@/components/cart/CartItem";
+import { useI18n } from "@/i18n";
 
 interface OrderSummaryProps {
   items: CartItemType[];
@@ -9,6 +10,7 @@ interface OrderSummaryProps {
 }
 
 export function OrderSummary({ items, onUpdateQuantity, onRemove }: OrderSummaryProps) {
+  const { t, locale } = useI18n();
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const deliveryFee = 25;
   const vat = subtotal * 0.15;
@@ -16,7 +18,7 @@ export function OrderSummary({ items, onUpdateQuantity, onRemove }: OrderSummary
   const currency = items[0]?.currency || "SAR";
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("en-SA", {
+    return new Intl.NumberFormat(locale, {
       style: "currency",
       currency,
       minimumFractionDigits: 0,
@@ -26,7 +28,7 @@ export function OrderSummary({ items, onUpdateQuantity, onRemove }: OrderSummary
 
   return (
     <div className="bg-card rounded-xl border border-border p-6 sticky top-20">
-      <h3 className="font-semibold text-lg mb-4">Order Summary</h3>
+      <h3 className="font-semibold text-lg mb-4">{t("orderSummary.title")}</h3>
 
       {/* Items */}
       <div className="space-y-3 mb-6 max-h-[300px] overflow-y-auto">
@@ -34,7 +36,7 @@ export function OrderSummary({ items, onUpdateQuantity, onRemove }: OrderSummary
           <div key={item.id} className="flex gap-3 py-3 border-b border-border last:border-b-0">
             <div className="w-14 h-14 rounded-lg bg-muted/50 flex-shrink-0 overflow-hidden">
               {item.image ? (
-                <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                <img src={item.image} alt={t(item.nameKey)} className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center">
                   <div className="w-8 h-8 rounded-full bg-muted" />
@@ -43,8 +45,8 @@ export function OrderSummary({ items, onUpdateQuantity, onRemove }: OrderSummary
             </div>
             
             <div className="flex-1 min-w-0">
-              <p className="font-medium text-sm line-clamp-1">{item.name}</p>
-              <p className="text-xs text-muted-foreground">{item.packSize}</p>
+              <p className="font-medium text-sm line-clamp-1">{t(item.nameKey)}</p>
+              <p className="text-xs text-muted-foreground">{t(item.packSizeKey)}</p>
               
               <div className="flex items-center justify-between mt-2">
                 <div className="flex items-center gap-1">
@@ -78,19 +80,19 @@ export function OrderSummary({ items, onUpdateQuantity, onRemove }: OrderSummary
       {/* Totals */}
       <div className="space-y-2 pt-4 border-t border-border">
         <div className="flex justify-between text-sm">
-          <span className="text-muted-foreground">Subtotal</span>
+          <span className="text-muted-foreground">{t("orderSummary.subtotal")}</span>
           <span>{formatPrice(subtotal)}</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-muted-foreground">Delivery Fee</span>
+          <span className="text-muted-foreground">{t("orderSummary.deliveryFee")}</span>
           <span>{formatPrice(deliveryFee)}</span>
         </div>
         <div className="flex justify-between text-sm">
-          <span className="text-muted-foreground">VAT (15%)</span>
+          <span className="text-muted-foreground">{t("orderSummary.vat")}</span>
           <span>{formatPrice(vat)}</span>
         </div>
         <div className="flex justify-between text-lg font-bold pt-2 border-t border-border">
-          <span>Total</span>
+          <span>{t("orderSummary.total")}</span>
           <span className="text-primary">{formatPrice(total)}</span>
         </div>
       </div>

@@ -1,11 +1,11 @@
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n";
 
 export interface CartItemType {
   id: string;
-  name: string;
-  packSize: string;
+  nameKey: string;
+  packSizeKey: string;
   price: number;
   currency: string;
   quantity: number;
@@ -19,8 +19,9 @@ interface CartItemProps {
 }
 
 export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
+  const { t, locale } = useI18n();
   const formatPrice = (price: number, currency: string) => {
-    return new Intl.NumberFormat("en-SA", {
+    return new Intl.NumberFormat(locale, {
       style: "currency",
       currency: currency,
       minimumFractionDigits: 0,
@@ -35,7 +36,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
         {item.image ? (
           <img
             src={item.image}
-            alt={item.name}
+            alt={t(item.nameKey)}
             className="w-full h-full object-cover"
           />
         ) : (
@@ -60,9 +61,11 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
       {/* Product Details */}
       <div className="flex-1 min-w-0">
         <h4 className="font-medium text-sm text-foreground line-clamp-1">
-          {item.name}
+          {t(item.nameKey)}
         </h4>
-        <p className="text-xs text-muted-foreground mb-2">{item.packSize}</p>
+        <p className="text-xs text-muted-foreground mb-2">
+          {t(item.packSizeKey)}
+        </p>
 
         <div className="flex items-center justify-between">
           {/* Quantity Controls */}

@@ -1,0 +1,367 @@
+{
+  "nav": {
+    "home": "Home",
+    "placeOrder": "Place Order",
+    "contact": "Contact",
+    "search": "Search",
+    "account": "Account",
+    "cart": "Cart",
+    "english": "English",
+    "arabic": "العربية",
+    "langEn": "EN",
+    "langAr": "AR"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Clinical supply partner",
+      "title": "Specialty medications and fertility treatments, delivered with clinical precision.",
+      "subtitle": "DietCo helps clinics place verified orders in minutes, with consistent availability, cold-chain handling, and transparent fulfillment across Saudi Arabia.",
+      "primaryCta": "Place Order",
+      "secondaryCta": "Contact Sales"
+    },
+    "trust": {
+      "verifiedSupply": "Verified supply chain",
+      "sameDay": "Same-day delivery",
+      "visibility": "24/7 order visibility",
+      "licensed": "Licensed distribution"
+    },
+    "audience": {
+      "title": "Trusted access for individuals and care teams",
+      "subtitle": "DietCo serves individuals who need reliable access to specialty medications, fertility treatments, hormone therapies, and injectable solutions. We also support clinics and pharmacies with consistent supply, verified sourcing, and delivery coordination, so every order meets the same clinical standards.",
+      "individuals": {
+        "title": "Individuals",
+        "body": "Order specialty treatments with clear pricing and delivery coordination."
+      },
+      "clinics": {
+        "title": "Clinics",
+        "body": "Consistent supply for fertility and hormone therapies with reliable lead times."
+      },
+      "pharmacies": {
+        "title": "Pharmacies",
+        "body": "Bulk ordering support with traceability and invoice-ready workflows."
+      }
+    },
+    "process": {
+      "title": "How ordering works",
+      "subtitle": "A clear, compliant workflow designed for procurement and clinical staff.",
+      "stepLabel": "Step {{number}}",
+      "steps": {
+        "request": {
+          "title": "Request",
+          "body": "Build a cart with available therapies and submit your order request."
+        },
+        "verify": {
+          "title": "Verify",
+          "body": "We confirm inventory, licensing, and cold-chain requirements."
+        },
+        "deliver": {
+          "title": "Deliver",
+          "body": "Scheduled delivery with tracking and documentation included."
+        }
+      }
+    },
+    "catalog": {
+      "title": "Catalog preview",
+      "subtitle": "A snapshot of our most requested therapies. View the full catalog to browse by category and availability.",
+      "cta": "View full catalog",
+      "noImage": "No image"
+    },
+    "featured": {
+      "title": "Featured categories",
+      "subtitle": "Start with the most requested therapies for fertility and specialty care.",
+      "cta": "Place Order"
+    },
+    "footer": {
+      "copyright": "© 2026 DietCo. Licensed healthcare marketplace serving Saudi Arabia."
+    }
+  },
+  "order": {
+    "title": "Place an Order",
+    "subtitle": "Browse specialty medications and fertility treatments available to verified clinics. Add items to your cart and check out when you are ready.",
+    "trust": {
+      "verified": "Verified supply chain",
+      "sameDay": "Same-day delivery",
+      "availability": "Real-time availability",
+      "invoicing": "Secure invoicing"
+    },
+    "empty": "No products found in this category."
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "For complex orders, onboarding, or delivery coordination, reach our team directly.",
+    "whatsapp": "Message on WhatsApp",
+    "info": {
+      "location": "Riyadh, Saudi Arabia"
+    },
+    "form": {
+      "title": "Request a quote",
+      "subtitle": "Tell us what you need and we will respond within one business day.",
+      "fields": {
+        "name": "Full name",
+        "organization": "Clinic / Company",
+        "email": "Email",
+        "phone": "Phone",
+        "message": "Request details"
+      },
+      "placeholders": {
+        "name": "Full name",
+        "organization": "Organization",
+        "email": "name@clinic.sa",
+        "phone": "+966 5X XXX XXXX",
+        "message": "Product names, quantities, and delivery timing."
+      },
+      "submit": "Send request"
+    },
+    "email": {
+      "subject": "DietCo request",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "organization": "Organization",
+      "details": "Request details"
+    }
+  },
+  "auth": {
+    "title": "Account access",
+    "subtitle": "Login or register your clinic to place and manage orders.",
+    "tabs": {
+      "login": "Login",
+      "register": "Register"
+    },
+    "fields": {
+      "email": "Work email",
+      "password": "Password",
+      "clinicName": "Clinic name",
+      "phone": "Phone number",
+      "createPassword": "Create password"
+    },
+    "placeholders": {
+      "email": "name@clinic.sa",
+      "password": "••••••••",
+      "clinicName": "Clinic name",
+      "phone": "+966 5X XXX XXXX"
+    },
+    "actions": {
+      "signIn": "Sign in",
+      "createAccount": "Create account"
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "emptyTitle": "Your cart is empty",
+    "emptySubtitle": "Add products to get started",
+    "subtotal": "Subtotal",
+    "proceedToCheckout": "Proceed to Checkout"
+  },
+  "orderSummary": {
+    "title": "Order Summary",
+    "subtotal": "Subtotal",
+    "deliveryFee": "Delivery Fee",
+    "vat": "VAT (15%)",
+    "total": "Total"
+  },
+  "payment": {
+    "title": "Payment Method",
+    "methods": {
+      "mada": "Saudi debit card",
+      "visa": "Credit/Debit card",
+      "mastercard": "Credit/Debit card",
+      "applepay": "Fast & secure"
+    },
+    "methodLabels": {
+      "mada": "Mada",
+      "visa": "Visa",
+      "mastercard": "Mastercard",
+      "applepay": "Apple Pay"
+    },
+    "applePay": {
+      "title": "Apple Pay",
+      "description": "You'll be prompted to confirm payment with Face ID or Touch ID"
+    },
+    "secureNotice": "Your payment information is encrypted and secure",
+    "fields": {
+      "cardholderName": "Cardholder Name",
+      "cardNumber": "Card Number",
+      "expiryDate": "Expiry Date",
+      "cvv": "CVV"
+    },
+    "placeholders": {
+      "cardholderName": "Name on card",
+      "cardNumber": "1234 5678 9012 3456",
+      "cardNumberMada": "xxxx xxxx xxxx xxxx",
+      "expiryDate": "MM/YY",
+      "cvv": "123"
+    }
+  },
+  "address": {
+    "title": "Delivery Address",
+    "searchPlaceholder": "Search for your address in Saudi Arabia...",
+    "loadingMap": "Loading map...",
+    "mapHint": "Click on the map or drag the marker to set your exact delivery location",
+    "fields": {
+      "fullName": "Full Name *",
+      "phone": "Phone Number *",
+      "address": "Street Address *",
+      "city": "City *",
+      "district": "District",
+      "postalCode": "Postal Code",
+      "notes": "Delivery Notes (Optional)"
+    },
+    "placeholders": {
+      "fullName": "Enter your full name",
+      "phone": "+966 5x xxx xxxx",
+      "address": "Building number, street name",
+      "city": "e.g., Riyadh",
+      "district": "e.g., Al Olaya",
+      "postalCode": "e.g., 12345",
+      "notes": "Gate code, landmark, special instructions..."
+    },
+    "errors": {
+      "apiKeyRequired": "Google Maps API key is required",
+      "loadFailed": "Failed to load Google Maps"
+    }
+  },
+  "checkout": {
+    "empty": {
+      "title": "Your cart is empty",
+      "subtitle": "Add some products to your cart to proceed with checkout.",
+      "cta": "Browse Products"
+    },
+    "progress": {
+      "delivery": "Delivery Details",
+      "payment": "Payment"
+    },
+    "trust": {
+      "secure": "Secure Checkout",
+      "sameDay": "Same Day Delivery",
+      "cutoff": "Order Before 2 PM"
+    },
+    "actions": {
+      "continueToPayment": "Continue to Payment"
+    },
+    "deliverySummary": {
+      "label": "Delivering to"
+    },
+    "validation": {
+      "fullName": "Please enter your full name",
+      "phone": "Please enter your phone number",
+      "address": "Please enter your address",
+      "city": "Please enter your city",
+      "paymentMethod": "Please select a payment method",
+      "cardNumber": "Please enter a valid card number",
+      "expiryDate": "Please enter a valid expiry date",
+      "cvv": "Please enter a valid CVV",
+      "cardholderName": "Please enter the cardholder name"
+    },
+    "confirmation": {
+      "title": "Order Confirmed!",
+      "subtitle": "Thank you for your order. We'll send you a confirmation email with tracking details.",
+      "detailsTitle": "Order Details",
+      "orderNumber": "Order Number",
+      "deliveryAddress": "Delivery Address",
+      "paymentMethod": "Payment Method",
+      "continueShopping": "Continue Shopping",
+      "viewOrders": "View Orders",
+      "toast": "Order placed successfully!"
+    }
+  },
+  "notFound": {
+    "title": "Oops! Page not found",
+    "cta": "Return to Home"
+  },
+  "products": {
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
+    "stockCount": "{{count}} in stock",
+    "items": {
+      "1": {
+        "name": "Gonal-F 75 IU Injection",
+        "packSize": "1 Pre-filled Pen",
+        "description": "Follicle-stimulating hormone (FSH) used in fertility treatment to help stimulate the ovaries and support egg development."
+      },
+      "2": {
+        "name": "Menopur 75 IU",
+        "packSize": "Pack of 5 Vials",
+        "description": "Combination of FSH and LH used in assisted reproduction to promote follicular development and ovulation."
+      },
+      "3": {
+        "name": "Ovidrel 250 mcg",
+        "packSize": "1 Pre-filled Syringe",
+        "description": "hCG trigger injection used to induce final maturation of eggs and support ovulation timing."
+      },
+      "4": {
+        "name": "Cetrotide 0.25mg",
+        "packSize": "Pack of 7 Injections",
+        "description": "GnRH antagonist used during fertility cycles to prevent premature ovulation."
+      },
+      "5": {
+        "name": "Progesterone 200mg",
+        "packSize": "Pack of 30 Capsules",
+        "description": "Progesterone support used to prepare and maintain the uterine lining in fertility protocols."
+      },
+      "6": {
+        "name": "Estradiol Valerate 2mg",
+        "packSize": "Pack of 28 Tablets",
+        "description": "Estrogen therapy used to support endometrial preparation and hormonal balance."
+      },
+      "7": {
+        "name": "Thyroid Levothyroxine 50mcg",
+        "packSize": "Pack of 100 Tablets",
+        "description": "Thyroid hormone replacement used to support normal thyroid function."
+      },
+      "8": {
+        "name": "Folic Acid 5mg",
+        "packSize": "Pack of 90 Tablets",
+        "description": "Folate supplement used to support prenatal health and reduce neural tube defect risk."
+      },
+      "9": {
+        "name": "Vitamin D3 50,000 IU",
+        "packSize": "Pack of 12 Capsules",
+        "description": "High-dose vitamin D used to correct deficiency and support bone health."
+      },
+      "10": {
+        "name": "Prenatal Complete",
+        "packSize": "Pack of 60 Softgels",
+        "description": "Comprehensive prenatal multivitamin formulated to support maternal and fetal needs."
+      },
+      "11": {
+        "name": "Clexane 40mg",
+        "packSize": "Pack of 10 Syringes",
+        "description": "Low-molecular-weight heparin used to reduce clotting risk under medical supervision."
+      },
+      "12": {
+        "name": "Humira 40mg",
+        "packSize": "2 Pre-filled Pens",
+        "description": "Biologic therapy used for autoimmune conditions; requires cold-chain handling."
+      }
+    }
+  },
+  "productDetails": {
+    "packSize": "Pack size",
+    "price": "Price",
+    "availability": "Availability",
+    "quantity": "Quantity",
+    "increaseQuantity": "Increase quantity",
+    "decreaseQuantity": "Decrease quantity",
+    "addToCart": "Add to cart"
+  },
+  "categories": {
+    "all": "All Products",
+    "ivf": "IVF & Fertility",
+    "hormones": "Hormones",
+    "vitamins": "Vitamins & Supplements",
+    "specialty": "Specialty Medications",
+    "injections": "Injectable Solutions"
+  },
+  "toasts": {
+    "updatedQuantity": "Updated {{name}} quantity",
+    "addedToCart": "Added {{name}} to cart",
+    "itemRemoved": "Item removed from cart",
+    "cartCleared": "Cart cleared"
+  },
+  "common": {
+    "edit": "Edit",
+    "processing": "Processing...",
+    "placeOrder": "Place Order"
+  }
+}

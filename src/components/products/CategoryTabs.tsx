@@ -1,8 +1,9 @@
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n";
 
 export interface Category {
   id: string;
-  name: string;
+  labelKey: string;
   icon?: React.ReactNode;
 }
 
@@ -17,6 +18,8 @@ export function CategoryTabs({
   activeCategory,
   onCategoryChange,
 }: CategoryTabsProps) {
+  const { t } = useI18n();
+
   return (
     <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2 -mx-4 px-4 md:mx-0 md:px-0">
       {categories.map((category) => (
@@ -29,7 +32,7 @@ export function CategoryTabs({
           )}
         >
           {category.icon}
-          <span>{category.name}</span>
+          <span>{t(category.labelKey)}</span>
         </button>
       ))}
     </div>

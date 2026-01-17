@@ -2,6 +2,7 @@ import { ShoppingCart, Menu, User, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Link, NavLink } from "react-router-dom";
+import { useI18n } from "@/i18n";
 
 interface HeaderProps {
   cartItemCount?: number;
@@ -10,6 +11,7 @@ interface HeaderProps {
 }
 
 export function Header({ cartItemCount = 0, onCartClick, onMenuClick }: HeaderProps) {
+  const { language, setLanguage, t } = useI18n();
   const cartButtonClassName = "relative";
   const cartCount =
     cartItemCount > 0 && (
@@ -47,7 +49,7 @@ export function Header({ cartItemCount = 0, onCartClick, onMenuClick }: HeaderPr
               cn("nav-link", isActive && "nav-link-active")
             }
           >
-            Home
+            {t("nav.home")}
           </NavLink>
           <NavLink
             to="/order"
@@ -55,7 +57,7 @@ export function Header({ cartItemCount = 0, onCartClick, onMenuClick }: HeaderPr
               cn("nav-link", isActive && "nav-link-active")
             }
           >
-            Place Order
+            {t("nav.placeOrder")}
           </NavLink>
           <NavLink
             to="/contact"
@@ -63,13 +65,28 @@ export function Header({ cartItemCount = 0, onCartClick, onMenuClick }: HeaderPr
               cn("nav-link", isActive && "nav-link-active")
             }
           >
-            Contact
+            {t("nav.contact")}
           </NavLink>
         </nav>
 
         {/* Right Side Actions */}
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="hidden md:inline-flex">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setLanguage(language === "en" ? "ar" : "en")}
+            aria-label={language === "en" ? t("nav.arabic") : t("nav.english")}
+            title={language === "en" ? t("nav.arabic") : t("nav.english")}
+          >
+            {language === "en" ? t("nav.arabic") : t("nav.english")}
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hidden md:inline-flex"
+            aria-label={t("nav.search")}
+            title={t("nav.search")}
+          >
             <Search className="h-5 w-5" />
           </Button>
 
@@ -78,6 +95,8 @@ export function Header({ cartItemCount = 0, onCartClick, onMenuClick }: HeaderPr
             variant="ghost"
             size="icon"
             className="hidden md:inline-flex"
+            aria-label={t("nav.account")}
+            title={t("nav.account")}
           >
             <Link to="/auth">
               <User className="h-5 w-5" />
@@ -91,6 +110,8 @@ export function Header({ cartItemCount = 0, onCartClick, onMenuClick }: HeaderPr
               size="icon"
               className={cartButtonClassName}
               onClick={onCartClick}
+              aria-label={t("nav.cart")}
+              title={t("nav.cart")}
             >
               <ShoppingCart className="h-5 w-5" />
               {cartCount}
@@ -101,6 +122,8 @@ export function Header({ cartItemCount = 0, onCartClick, onMenuClick }: HeaderPr
               variant="ghost"
               size="icon"
               className={cartButtonClassName}
+              aria-label={t("nav.cart")}
+              title={t("nav.cart")}
             >
               <Link to="/order">
                 <ShoppingCart className="h-5 w-5" />

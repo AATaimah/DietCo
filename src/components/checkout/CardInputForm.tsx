@@ -3,7 +3,7 @@ import { CreditCard, Lock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PaymentMethod } from "./PaymentMethodSelector";
-import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n";
 
 interface CardDetails {
   cardNumber: string;
@@ -18,6 +18,7 @@ interface CardInputFormProps {
 }
 
 export function CardInputForm({ paymentMethod, onChange }: CardInputFormProps) {
+  const { t } = useI18n();
   const [cardDetails, setCardDetails] = useState<CardDetails>({
     cardNumber: "",
     expiryDate: "",
@@ -65,9 +66,9 @@ export function CardInputForm({ paymentMethod, onChange }: CardInputFormProps) {
             <path d="M15.3502 5.11867C15.8622 4.49067 16.2182 3.62667 16.1182 2.75067C15.3742 2.78267 14.4542 3.26267 13.9182 3.87667C13.4422 4.42067 13.0142 5.31067 13.1262 6.15467C13.9622 6.22067 14.8262 5.73467 15.3502 5.11867Z"/>
           </svg>
         </div>
-        <p className="font-medium text-foreground mb-1">Apple Pay</p>
+        <p className="font-medium text-foreground mb-1">{t("payment.applePay.title")}</p>
         <p className="text-sm text-muted-foreground">
-          You'll be prompted to confirm payment with Face ID or Touch ID
+          {t("payment.applePay.description")}
         </p>
       </div>
     );
@@ -79,15 +80,15 @@ export function CardInputForm({ paymentMethod, onChange }: CardInputFormProps) {
     <div className="space-y-4">
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <Lock className="h-4 w-4" />
-        <span>Your payment information is encrypted and secure</span>
+        <span>{t("payment.secureNotice")}</span>
       </div>
 
       <div className="space-y-4">
         <div>
-          <Label htmlFor="cardholderName">Cardholder Name</Label>
+          <Label htmlFor="cardholderName">{t("payment.fields.cardholderName")}</Label>
           <Input
             id="cardholderName"
-            placeholder="Name on card"
+            placeholder={t("payment.placeholders.cardholderName")}
             value={cardDetails.cardholderName}
             onChange={(e) => handleChange("cardholderName", e.target.value)}
             className="mt-1.5"
@@ -95,11 +96,15 @@ export function CardInputForm({ paymentMethod, onChange }: CardInputFormProps) {
         </div>
 
         <div>
-          <Label htmlFor="cardNumber">Card Number</Label>
+          <Label htmlFor="cardNumber">{t("payment.fields.cardNumber")}</Label>
           <div className="relative mt-1.5">
             <Input
               id="cardNumber"
-              placeholder={isMada ? "xxxx xxxx xxxx xxxx" : "1234 5678 9012 3456"}
+              placeholder={
+                isMada
+                  ? t("payment.placeholders.cardNumberMada")
+                  : t("payment.placeholders.cardNumber")
+              }
               value={cardDetails.cardNumber}
               onChange={(e) => handleChange("cardNumber", e.target.value)}
               className="pr-16"
@@ -119,10 +124,10 @@ export function CardInputForm({ paymentMethod, onChange }: CardInputFormProps) {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="expiryDate">Expiry Date</Label>
+            <Label htmlFor="expiryDate">{t("payment.fields.expiryDate")}</Label>
             <Input
               id="expiryDate"
-              placeholder="MM/YY"
+              placeholder={t("payment.placeholders.expiryDate")}
               value={cardDetails.expiryDate}
               onChange={(e) => handleChange("expiryDate", e.target.value)}
               className="mt-1.5"
@@ -130,10 +135,10 @@ export function CardInputForm({ paymentMethod, onChange }: CardInputFormProps) {
             />
           </div>
           <div>
-            <Label htmlFor="cvv">CVV</Label>
+            <Label htmlFor="cvv">{t("payment.fields.cvv")}</Label>
             <Input
               id="cvv"
-              placeholder="123"
+              placeholder={t("payment.placeholders.cvv")}
               value={cardDetails.cvv}
               onChange={(e) => handleChange("cvv", e.target.value)}
               className="mt-1.5"

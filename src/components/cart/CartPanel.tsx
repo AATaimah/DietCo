@@ -2,6 +2,7 @@ import { ShoppingBag, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CartItem, CartItemType } from "./CartItem";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n";
 
 interface CartPanelProps {
   items: CartItemType[];
@@ -20,6 +21,7 @@ export function CartPanel({
   onRemove,
   onCheckout,
 }: CartPanelProps) {
+  const { t, locale } = useI18n();
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -27,7 +29,7 @@ export function CartPanel({
   const currency = items[0]?.currency || "SAR";
 
   const formatPrice = (price: number, currency: string) => {
-    return new Intl.NumberFormat("en-SA", {
+    return new Intl.NumberFormat(locale, {
       style: "currency",
       currency: currency,
       minimumFractionDigits: 0,
@@ -45,7 +47,7 @@ export function CartPanel({
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-2">
               <ShoppingBag className="h-5 w-5 text-primary" />
-              <h2 className="font-semibold text-lg">Cart</h2>
+              <h2 className="font-semibold text-lg">{t("cart.title")}</h2>
               {itemCount > 0 && (
                 <span className="bg-primary/10 text-primary text-xs font-semibold px-2 py-0.5 rounded-full">
                   {itemCount}
@@ -59,9 +61,9 @@ export function CartPanel({
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
                 <ShoppingBag className="h-8 w-8 text-muted-foreground" />
               </div>
-              <p className="text-muted-foreground">Your cart is empty</p>
+              <p className="text-muted-foreground">{t("cart.emptyTitle")}</p>
               <p className="text-sm text-muted-foreground mt-1">
-                Add products to get started
+                {t("cart.emptySubtitle")}
               </p>
             </div>
           ) : (
@@ -79,7 +81,9 @@ export function CartPanel({
 
               <div className="mt-6 pt-4 border-t border-border">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-muted-foreground">Subtotal</span>
+                  <span className="text-muted-foreground">
+                    {t("cart.subtotal")}
+                  </span>
                   <span className="price-large">
                     {formatPrice(subtotal, currency)}
                   </span>
@@ -91,7 +95,7 @@ export function CartPanel({
                   className="w-full"
                   onClick={onCheckout}
                 >
-                  Proceed to Checkout
+                  {t("cart.proceedToCheckout")}
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </div>
@@ -127,7 +131,7 @@ export function CartPanel({
           <div className="flex items-center justify-between px-4 pb-4 border-b border-border">
             <div className="flex items-center gap-2">
               <ShoppingBag className="h-5 w-5 text-primary" />
-              <h2 className="font-semibold text-lg">Cart</h2>
+              <h2 className="font-semibold text-lg">{t("cart.title")}</h2>
               {itemCount > 0 && (
                 <span className="bg-primary/10 text-primary text-xs font-semibold px-2 py-0.5 rounded-full">
                   {itemCount}
@@ -146,7 +150,7 @@ export function CartPanel({
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
                   <ShoppingBag className="h-8 w-8 text-muted-foreground" />
                 </div>
-                <p className="text-muted-foreground">Your cart is empty</p>
+                <p className="text-muted-foreground">{t("cart.emptyTitle")}</p>
               </div>
             ) : (
               items.map((item) => (
@@ -164,7 +168,9 @@ export function CartPanel({
           {items.length > 0 && (
             <div className="p-4 border-t border-border bg-card">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-muted-foreground">Subtotal</span>
+                <span className="text-muted-foreground">
+                  {t("cart.subtotal")}
+                </span>
                 <span className="price-large">
                   {formatPrice(subtotal, currency)}
                 </span>
@@ -175,7 +181,7 @@ export function CartPanel({
                 className="w-full touch-target"
                 onClick={onCheckout}
               >
-                Proceed to Checkout
+                {t("cart.proceedToCheckout")}
                 <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
             </div>

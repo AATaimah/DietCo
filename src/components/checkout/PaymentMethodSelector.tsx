@@ -1,5 +1,6 @@
 import { CreditCard, Smartphone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/i18n";
 
 export type PaymentMethod = "mada" | "visa" | "mastercard" | "applepay";
 
@@ -12,7 +13,7 @@ const paymentMethods = [
   {
     id: "mada" as PaymentMethod,
     name: "Mada",
-    description: "Saudi debit card",
+    descriptionKey: "payment.methods.mada",
     logo: (
       <div className="w-12 h-8 bg-gradient-to-r from-[#004D40] to-[#00796B] rounded flex items-center justify-center">
         <span className="text-white font-bold text-xs">mada</span>
@@ -22,7 +23,7 @@ const paymentMethods = [
   {
     id: "visa" as PaymentMethod,
     name: "Visa",
-    description: "Credit/Debit card",
+    descriptionKey: "payment.methods.visa",
     logo: (
       <div className="w-12 h-8 bg-gradient-to-r from-[#1A1F71] to-[#2D4AA8] rounded flex items-center justify-center">
         <span className="text-white font-bold text-xs italic">VISA</span>
@@ -32,7 +33,7 @@ const paymentMethods = [
   {
     id: "mastercard" as PaymentMethod,
     name: "Mastercard",
-    description: "Credit/Debit card",
+    descriptionKey: "payment.methods.mastercard",
     logo: (
       <div className="w-12 h-8 bg-foreground/5 rounded flex items-center justify-center">
         <div className="flex -space-x-2">
@@ -45,7 +46,7 @@ const paymentMethods = [
   {
     id: "applepay" as PaymentMethod,
     name: "Apple Pay",
-    description: "Fast & secure",
+    descriptionKey: "payment.methods.applepay",
     logo: (
       <div className="w-12 h-8 bg-foreground rounded flex items-center justify-center">
         <Smartphone className="w-4 h-4 text-background" />
@@ -58,11 +59,13 @@ export function PaymentMethodSelector({
   selectedMethod,
   onSelect,
 }: PaymentMethodSelectorProps) {
+  const { t } = useI18n();
+
   return (
     <div className="space-y-3">
       <h3 className="font-semibold text-foreground flex items-center gap-2">
         <CreditCard className="h-5 w-5 text-primary" />
-        Payment Method
+        {t("payment.title")}
       </h3>
       
       <div className="grid grid-cols-2 gap-3">
@@ -81,7 +84,7 @@ export function PaymentMethodSelector({
             {method.logo}
             <div className="flex-1 min-w-0">
               <p className="font-medium text-sm text-foreground">{method.name}</p>
-              <p className="text-xs text-muted-foreground">{method.description}</p>
+              <p className="text-xs text-muted-foreground">{t(method.descriptionKey)}</p>
             </div>
             <div
               className={cn(

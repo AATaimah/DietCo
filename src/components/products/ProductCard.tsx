@@ -1,12 +1,14 @@
-import { Plus, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useI18n } from "@/i18n";
 
 export interface Product {
   id: string;
-  name: string;
-  packSize: string;
+  nameKey: string;
+  packSizeKey: string;
+  descriptionKey: string;
   price: number;
   currency: string;
   inStock: boolean;
@@ -17,21 +19,45 @@ export interface Product {
 
 interface ProductCardProps {
   product: Product;
-  onAdd: (product: Product) => void;
+  onAdd: (product: Product, quantity: number) => void;
   isInCart?: boolean;
+  onOpen?: (product: Product) => void;
 }
 
-export function ProductCard({ product, onAdd, isInCart = false }: ProductCardProps) {
+export function ProductCard({ product, onAdd, isInCart = false, onOpen }: ProductCardProps) {
+  const { t, locale } = useI18n();
   const [isAdding, setIsAdding] = useState(false);
+  const [quantity, setQuantity] = useState(1);
 
-  const handleAdd = () => {
+  const handleAdd = (event?: React.MouseEvent<HTMLButtonElement>) => {
+    event?.stopPropagation();
     setIsAdding(true);
-    onAdd(product);
+    onAdd(product, quantity);
     setTimeout(() => setIsAdding(false), 600);
   };
 
+  const handleOpen = () => {
+    onOpen?.(product);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (!onOpen) return;
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      onOpen(product);
+    }
+  };
+
+  const handleQuantityChange = (
+    delta: number,
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.stopPropagation();
+    setQuantity((current) => Math.max(1, current + delta));
+  };
+
   const formatPrice = (price: number, currency: string) => {
-    return new Intl.NumberFormat("en-SA", {
+    return new Intl.NumberFormat(locale, {
       style: "currency",
       currency: currency,
       minimumFractionDigits: 0,
@@ -40,13 +66,19 @@ export function ProductCard({ product, onAdd, isInCart = false }: ProductCardPro
   };
 
   return (
-    <div className="product-card group">
+    <div
+      className={cn("product-card group flex flex-col", onOpen && "cursor-pointer")}
+      role={onOpen ? "button" : undefined}
+      tabIndex={onOpen ? 0 : undefined}
+      onClick={onOpen ? handleOpen : undefined}
+      onKeyDown={onOpen ? handleKeyDown : undefined}
+    >
       {/* Product Image */}
       <div className="aspect-square bg-muted/50 relative overflow-hidden">
         {product.image ? (
           <img
             src={product.image}
-            alt={product.name}
+            alt={t(product.nameKey)}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
@@ -77,43 +109,73 @@ export function ProductCard({ product, onAdd, isInCart = false }: ProductCardPro
           >
             {product.inStock
               ? product.stockCount
-                ? `${product.stockCount} in stock`
-                : "In Stock"
-              : "Out of Stock"}
+                ? t("products.stockCount", { count: product.stockCount })
+                : t("products.inStock")
+              : t("products.outOfStock")}
           </span>
         </div>
       </div>
 
       {/* Product Info */}
-      <div className="p-4">
-        <h3 className="font-semibold text-foreground line-clamp-2 mb-1">
-          {product.name}
+      <div className="p-4 flex flex-col flex-1">
+        <h3 className="font-semibold text-foreground line-clamp-2 min-h-[2.5rem] mb-1">
+          {t(product.nameKey)}
         </h3>
-        <p className="text-sm text-muted-foreground mb-3">{product.packSize}</p>
+        <p className="text-sm text-muted-foreground min-h-[1.25rem] mb-3">
+          {t(product.packSizeKey)}
+        </p>
 
         <div className="flex items-center justify-between gap-3">
           <span className="price-large text-foreground">
             {formatPrice(product.price, product.currency)}
           </span>
-          
-          <Button
-            variant="add-to-cart"
-            size="icon"
-            onClick={handleAdd}
-            disabled={!product.inStock}
-            className={cn(
-              "transition-all",
-              isAdding && "bg-success",
-              isInCart && !isAdding && "bg-primary/80"
-            )}
+
+          <div
+            className="flex items-center gap-1"
+            onClick={(event) => event.stopPropagation()}
           >
-            {isAdding ? (
-              <Check className="h-5 w-5 animate-scale-in" />
-            ) : (
-              <Plus className="h-5 w-5" />
-            )}
-          </Button>
+            <Button
+              variant="pill"
+              size="pill"
+              className="h-7 w-7"
+              onClick={(event) => handleQuantityChange(-1, event)}
+              aria-label={t("productDetails.decreaseQuantity")}
+            >
+              <span>-</span>
+            </Button>
+            <span className="w-6 text-center text-sm font-semibold tabular-nums">
+              {quantity}
+            </span>
+            <Button
+              variant="pill"
+              size="pill"
+              className="h-7 w-7"
+              onClick={(event) => handleQuantityChange(1, event)}
+              aria-label={t("productDetails.increaseQuantity")}
+            >
+              <span>+</span>
+            </Button>
+          </div>
         </div>
+
+        <Button
+          variant="add-to-cart"
+          size="sm"
+          onClick={handleAdd}
+          disabled={!product.inStock}
+          className={cn(
+            "mt-auto w-full text-xs whitespace-nowrap transition-all",
+            isAdding && "bg-success",
+            isInCart && !isAdding && "bg-primary/80"
+          )}
+          aria-label={t("productDetails.addToCart")}
+        >
+          {isAdding ? (
+            <Check className="h-4 w-4 animate-scale-in" />
+          ) : (
+            t("productDetails.addToCart")
+          )}
+        </Button>
       </div>
     </div>
   );
