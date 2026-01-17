@@ -150,7 +150,11 @@
     "title": "Cart",
     "emptyTitle": "Your cart is empty",
     "emptySubtitle": "Add products to get started",
+    "remove": "Remove item",
     "subtotal": "Subtotal",
+    "deliveryFee": "Delivery Fee",
+    "vat": "VAT (15%)",
+    "total": "Total",
     "proceedToCheckout": "Proceed to Checkout"
   },
   "orderSummary": {

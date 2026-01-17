@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Link, NavLink } from "react-router-dom";
 import { useI18n } from "@/i18n";
+import { useCart } from "@/hooks/useCart";
 
 interface HeaderProps {
   cartItemCount?: number;
@@ -10,13 +11,15 @@ interface HeaderProps {
   onMenuClick?: () => void;
 }
 
-export function Header({ cartItemCount = 0, onCartClick, onMenuClick }: HeaderProps) {
+export function Header({ cartItemCount, onCartClick, onMenuClick }: HeaderProps) {
   const { language, setLanguage, t } = useI18n();
+  const { itemCount } = useCart();
+  const resolvedCartCount = cartItemCount ?? itemCount;
   const cartButtonClassName = "relative";
   const cartCount =
-    cartItemCount > 0 && (
+    resolvedCartCount > 0 && (
       <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[11px] font-semibold text-primary-foreground animate-scale-in">
-        {cartItemCount > 99 ? "99+" : cartItemCount}
+        {resolvedCartCount > 99 ? "99+" : resolvedCartCount}
       </span>
     );
 

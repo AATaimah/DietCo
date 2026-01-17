@@ -74,7 +74,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
               variant="pill"
               size="pill"
               onClick={() =>
-                onUpdateQuantity(item.id, Math.max(0, item.quantity - 1))
+                onUpdateQuantity(item.id, Math.max(1, item.quantity - 1))
               }
               className="h-7 w-7"
             >
@@ -106,6 +106,8 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
         size="icon-sm"
         onClick={() => onRemove(item.id)}
         className="text-muted-foreground hover:text-destructive flex-shrink-0"
+        aria-label={t("cart.remove")}
+        title={t("cart.remove")}
       >
         <Trash2 className="h-4 w-4" />
       </Button>

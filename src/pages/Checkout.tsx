@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, ShieldCheck, Truck, Clock, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { OrderSummary } from "@/components/checkout/OrderSummary";
 import { CartItemType } from "@/components/cart/CartItem";
 import { toast } from "sonner";
 import { useI18n } from "@/i18n";
+import { useCart } from "@/hooks/useCart";
 
 // Get API key from environment or use placeholder
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
@@ -37,33 +38,14 @@ const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t } = useI18n();
+  const { items, updateQuantity, removeItem, setItems, itemCount } = useCart();
   
-  // Get cart items from navigation state or use sample data
-  const [items, setItems] = useState<CartItemType[]>(() => {
-    const state = location.state as { items?: CartItemType[] };
-    if (state?.items && state.items.length > 0) {
-      return state.items;
+  useEffect(() => {
+    const state = location.state as { items?: CartItemType[] } | undefined;
+    if (state?.items?.length && items.length === 0) {
+      setItems(state.items);
     }
-    // Sample items for demo if no cart items passed
-    return [
-      {
-        id: "1",
-        nameKey: "products.items.1.name",
-        packSizeKey: "products.items.1.packSize",
-        price: 450,
-        currency: "SAR",
-        quantity: 2,
-      },
-      {
-        id: "2",
-        nameKey: "products.items.2.name",
-        packSizeKey: "products.items.2.packSize",
-        price: 1250,
-        currency: "SAR",
-        quantity: 1,
-      },
-    ];
-  });
+  }, [location.state, items.length, setItems]);
 
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<PaymentMethod | null>(null);
   const [deliveryDetails, setDeliveryDetails] = useState<DeliveryDetails | null>(null);
@@ -75,19 +57,11 @@ const Checkout = () => {
     : "";
 
   const handleUpdateQuantity = (id: string, quantity: number) => {
-    if (quantity <= 0) {
-      setItems((prev) => prev.filter((item) => item.id !== id));
-      toast.success(t("toasts.itemRemoved"));
-      return;
-    }
-    setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
-    );
+    updateQuantity(id, quantity);
   };
 
   const handleRemove = (id: string) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
-    toast.success(t("toasts.itemRemoved"));
+    removeItem(id);
   };
 
   const validateDeliveryDetails = () => {
@@ -220,7 +194,7 @@ const Checkout = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header cartItemCount={items.reduce((sum, item) => sum + item.quantity, 0)} />
+      <Header cartItemCount={itemCount} />
 
       {/* Progress Bar */}
       <div className="border-b border-border bg-card">

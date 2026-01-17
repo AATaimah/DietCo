@@ -26,6 +26,9 @@ export function CartPanel({
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+  const deliveryFee = 25;
+  const vat = subtotal * 0.15;
+  const total = subtotal + deliveryFee + vat;
   const currency = items[0]?.currency || "SAR";
 
   const formatPrice = (price: number, currency: string) => {
@@ -79,13 +82,29 @@ export function CartPanel({
                 ))}
               </div>
 
-              <div className="mt-6 pt-4 border-t border-border">
-                <div className="flex items-center justify-between mb-4">
+              <div className="mt-6 pt-4 border-t border-border space-y-2">
+                <div className="flex items-center justify-between text-sm">
                   <span className="text-muted-foreground">
                     {t("cart.subtotal")}
                   </span>
-                  <span className="price-large">
-                    {formatPrice(subtotal, currency)}
+                  <span>{formatPrice(subtotal, currency)}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">
+                    {t("cart.deliveryFee")}
+                  </span>
+                  <span>{formatPrice(deliveryFee, currency)}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">
+                    {t("cart.vat")}
+                  </span>
+                  <span>{formatPrice(vat, currency)}</span>
+                </div>
+                <div className="flex items-center justify-between text-base font-semibold pt-2 border-t border-border">
+                  <span>{t("cart.total")}</span>
+                  <span className="text-primary">
+                    {formatPrice(total, currency)}
                   </span>
                 </div>
 
@@ -166,13 +185,29 @@ export function CartPanel({
 
           {/* Footer */}
           {items.length > 0 && (
-            <div className="p-4 border-t border-border bg-card">
-              <div className="flex items-center justify-between mb-4">
+            <div className="p-4 border-t border-border bg-card space-y-2">
+              <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">
                   {t("cart.subtotal")}
                 </span>
-                <span className="price-large">
-                  {formatPrice(subtotal, currency)}
+                <span>{formatPrice(subtotal, currency)}</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">
+                  {t("cart.deliveryFee")}
+                </span>
+                <span>{formatPrice(deliveryFee, currency)}</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">
+                  {t("cart.vat")}
+                </span>
+                <span>{formatPrice(vat, currency)}</span>
+              </div>
+              <div className="flex items-center justify-between text-base font-semibold pt-2 border-t border-border">
+                <span>{t("cart.total")}</span>
+                <span className="text-primary">
+                  {formatPrice(total, currency)}
                 </span>
               </div>
               <Button

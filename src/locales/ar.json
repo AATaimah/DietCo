@@ -150,7 +150,11 @@
     "title": "السلة",
     "emptyTitle": "سلتك فارغة",
     "emptySubtitle": "أضف منتجات للبدء",
+    "remove": "إزالة المنتج",
     "subtotal": "المجموع الفرعي",
+    "deliveryFee": "رسوم التوصيل",
+    "vat": "ضريبة القيمة المضافة (15%)",
+    "total": "الإجمالي",
     "proceedToCheckout": "المتابعة للدفع"
   },
   "orderSummary": {
