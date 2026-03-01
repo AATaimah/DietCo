@@ -280,6 +280,9 @@
     "actions": {
       "continueToPayment": "المتابعة إلى الدفع"
     },
+    "messages": {
+      "orderSaveFailed": "تم الدفع بنجاح، لكن تعذر حفظ الطلب. يرجى التواصل مع الدعم."
+    },
     "deliverySummary": {
       "label": "التوصيل إلى"
     },
@@ -306,6 +309,20 @@
       "continueShopping": "متابعة التسوق",
       "viewOrders": "عرض الطلبات",
       "toast": "تم إرسال الطلب بنجاح!"
+    }
+  },
+  "orders": {
+    "title": "طلباتي",
+    "subtitle": "تابع طلباتك السابقة وحالتها الحالية.",
+    "itemsCount": "{{count}} عناصر",
+    "empty": {
+      "title": "لا توجد طلبات بعد",
+      "subtitle": "عند إتمام أي طلب، سيظهر هنا.",
+      "cta": "اطلب الآن"
+    },
+    "messages": {
+      "loading": "جارٍ تحميل الطلبات...",
+      "loadError": "تعذر تحميل طلباتك."
     }
   },
   "notFound": {

@@ -33,12 +33,25 @@ export interface DeliveryDetails {
   lng?: number;
 }
 
+const PREFILL_TEXT_FIELDS = [
+  "fullName",
+  "clinicName",
+  "email",
+  "phone",
+  "address",
+  "city",
+  "district",
+  "postalCode",
+  "additionalNotes",
+] as const;
+
 interface AddressInputProps {
   apiKey: string;
   onChange: (details: DeliveryDetails) => void;
+  initialValues?: Partial<DeliveryDetails>;
 }
 
-export function AddressInput({ apiKey, onChange }: AddressInputProps) {
+export function AddressInput({ apiKey, onChange, initialValues }: AddressInputProps) {
   const { t } = useI18n();
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -82,6 +95,47 @@ export function AddressInput({ apiKey, onChange }: AddressInputProps) {
       setIsMapInitialized(true);
     }
   }, [isLoaded, initMap, isMapInitialized]);
+
+  useEffect(() => {
+    if (!initialValues) return;
+
+    setDetails((previous) => {
+      const next = { ...previous };
+
+      if (initialValues.accountType) {
+        next.accountType = initialValues.accountType;
+      }
+
+      for (const field of PREFILL_TEXT_FIELDS) {
+        const incoming = initialValues[field];
+        if (typeof incoming !== "string") continue;
+
+        const hasIncomingValue = incoming.trim() !== "";
+        if (!hasIncomingValue) continue;
+
+        const current = previous[field];
+        const isCurrentEmpty = typeof current === "string" ? current.trim() === "" : true;
+        if (isCurrentEmpty) {
+          next[field] = incoming;
+        }
+      }
+
+      if (
+        typeof initialValues.lat === "number" &&
+        Number.isFinite(initialValues.lat) &&
+        typeof initialValues.lng === "number" &&
+        Number.isFinite(initialValues.lng) &&
+        typeof previous.lat !== "number" &&
+        typeof previous.lng !== "number"
+      ) {
+        next.lat = initialValues.lat;
+        next.lng = initialValues.lng;
+      }
+
+      onChange(next);
+      return next;
+    });
+  }, [initialValues, onChange]);
 
   const handleChange = (field: keyof DeliveryDetails, value: string) => {
     const newDetails = { ...details, [field]: value };

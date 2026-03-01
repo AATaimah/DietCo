@@ -280,6 +280,9 @@
     "actions": {
       "continueToPayment": "Continue to Payment"
     },
+    "messages": {
+      "orderSaveFailed": "Payment succeeded, but we could not save your order. Please contact support."
+    },
     "deliverySummary": {
       "label": "Delivering to"
     },
@@ -306,6 +309,20 @@
       "continueShopping": "Continue Shopping",
       "viewOrders": "View Orders",
       "toast": "Order placed successfully!"
+    }
+  },
+  "orders": {
+    "title": "My Orders",
+    "subtitle": "Track your previous orders and current status.",
+    "itemsCount": "{{count}} items",
+    "empty": {
+      "title": "No orders yet",
+      "subtitle": "When you place an order, it will appear here.",
+      "cta": "Place Order"
+    },
+    "messages": {
+      "loading": "Loading orders...",
+      "loadError": "Unable to load your orders."
     }
   },
   "notFound": {

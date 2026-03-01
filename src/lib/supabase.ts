@@ -191,6 +191,22 @@ export interface OrderRecord {
   items: unknown;
 }
 
+interface CreateOrderPayload {
+  userId: string | null;
+  accountType: AccountType;
+  buyerName: string;
+  clinicName: string | null;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  district: string | null;
+  postalCode: string | null;
+  additionalNotes: string | null;
+  items: unknown[];
+  status?: string;
+}
+
 export const upsertProfile = async (accessToken: string, payload: ProfilePayload) => {
   await supabaseRequest(
     "/rest/v1/profiles?on_conflict=id",
@@ -292,4 +308,37 @@ export const getOrders = async (accessToken: string, userId: string) => {
     accessToken,
   );
   return Array.isArray(response) ? (response as OrderRecord[]) : [];
+};
+
+export const createOrder = async (accessToken: string | null | undefined, payload: CreateOrderPayload) => {
+  const response = await supabaseRequest(
+    "/rest/v1/orders",
+    {
+      method: "POST",
+      headers: {
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify([
+        {
+          user_id: payload.userId,
+          account_type: payload.accountType,
+          buyer_name: payload.buyerName,
+          clinic_name: payload.clinicName,
+          email: payload.email,
+          phone: payload.phone,
+          address: payload.address,
+          city: payload.city,
+          district: payload.district,
+          postal_code: payload.postalCode,
+          additional_notes: payload.additionalNotes,
+          items: payload.items,
+          status: payload.status || "pending",
+        },
+      ]),
+    },
+    accessToken || undefined,
+  );
+
+  const rows = Array.isArray(response) ? (response as OrderRecord[]) : [];
+  return rows[0] || null;
 };
