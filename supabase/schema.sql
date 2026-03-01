@@ -7,9 +7,28 @@ create table if not exists public.profiles (
   full_name text not null,
   clinic_name text,
   phone text not null,
+  address_line1 text,
+  address_city text,
+  address_district text,
+  address_postal_code text,
+  payment_cardholder_name text,
+  payment_brand text,
+  payment_last4 text,
+  payment_exp_month text,
+  payment_exp_year text,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table public.profiles add column if not exists address_line1 text;
+alter table public.profiles add column if not exists address_city text;
+alter table public.profiles add column if not exists address_district text;
+alter table public.profiles add column if not exists address_postal_code text;
+alter table public.profiles add column if not exists payment_cardholder_name text;
+alter table public.profiles add column if not exists payment_brand text;
+alter table public.profiles add column if not exists payment_last4 text;
+alter table public.profiles add column if not exists payment_exp_month text;
+alter table public.profiles add column if not exists payment_exp_year text;
 
 create table if not exists public.orders (
   id uuid primary key default gen_random_uuid(),

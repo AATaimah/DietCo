@@ -406,5 +406,40 @@
     "edit": "Edit",
     "processing": "Processing...",
     "placeOrder": "Place Order"
+  },
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your account details, delivery preferences, and payment summary.",
+    "sections": {
+      "account": "Account details",
+      "address": "Default delivery address",
+      "payment": "Payment summary",
+      "orders": "Recent orders"
+    },
+    "actions": {
+      "save": "Save profile",
+      "logout": "Log out"
+    },
+    "payment": {
+      "note": "For security, only non-sensitive card details are stored. Never store full card number or CVV.",
+      "cardBrand": "Card brand",
+      "brandPlaceholder": "Visa, Mastercard, Mada",
+      "cardLast4": "Last 4 digits",
+      "expMonth": "Exp month",
+      "expYear": "Exp year"
+    },
+    "orders": {
+      "empty": "No previous orders yet.",
+      "itemsCount": "{{count}} items"
+    },
+    "messages": {
+      "loading": "Loading profile...",
+      "saved": "Profile updated successfully",
+      "saveError": "Unable to update profile. Please try again.",
+      "loadError": "Unable to load profile details.",
+      "cardLast4Invalid": "Card last 4 must contain exactly 4 digits",
+      "cardMonthInvalid": "Expiry month must be between 1 and 12",
+      "cardYearInvalid": "Expiry year must be 2 or 4 digits"
+    }
   }
 }

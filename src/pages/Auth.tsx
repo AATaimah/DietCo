@@ -26,7 +26,7 @@ const Auth = () => {
     supabaseConfigured,
   } = useAuth();
 
-  const nextPath = searchParams.get("next") || "/";
+  const nextPath = searchParams.get("next");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeTab, setActiveTab] = useState<AuthTab>("login");
@@ -54,7 +54,7 @@ const Auth = () => {
   }, [searchParams]);
 
   useEffect(() => {
-    if (!isLoading && isAuthenticated) {
+    if (!isLoading && isAuthenticated && nextPath) {
       navigate(nextPath, { replace: true });
     }
   }, [isAuthenticated, isLoading, navigate, nextPath]);
@@ -70,7 +70,7 @@ const Auth = () => {
       setIsSubmitting(true);
       await login(loginEmail.trim(), loginPassword);
       toast.success(t("auth.messages.loginSuccess"));
-      navigate(nextPath, { replace: true });
+      navigate(nextPath || "/", { replace: true });
     } catch (error) {
       const message = error instanceof Error ? error.message : t("auth.messages.loginError");
       toast.error(message);

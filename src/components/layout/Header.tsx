@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { Link, NavLink } from "react-router-dom";
 import { useI18n } from "@/i18n";
 import { useCart } from "@/hooks/useCart";
+import { useAuth } from "@/hooks/useAuth";
 
 interface HeaderProps {
   cartItemCount?: number;
@@ -14,6 +15,7 @@ interface HeaderProps {
 export function Header({ cartItemCount, onCartClick, onMenuClick }: HeaderProps) {
   const { language, setLanguage, t } = useI18n();
   const { itemCount } = useCart();
+  const { isAuthenticated } = useAuth();
   const resolvedCartCount = cartItemCount ?? itemCount;
   const cartButtonClassName = "relative";
   const cartCount =
@@ -101,7 +103,7 @@ export function Header({ cartItemCount, onCartClick, onMenuClick }: HeaderProps)
             aria-label={t("nav.account")}
             title={t("nav.account")}
           >
-            <Link to="/auth">
+            <Link to={isAuthenticated ? "/profile" : "/auth"}>
               <User className="h-5 w-5" />
             </Link>
           </Button>

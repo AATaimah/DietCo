@@ -150,6 +150,45 @@ interface ProfilePayload {
   fullName: string;
   clinicName: string | null;
   phone: string;
+  addressLine1?: string | null;
+  addressCity?: string | null;
+  addressDistrict?: string | null;
+  addressPostalCode?: string | null;
+  paymentCardholderName?: string | null;
+  paymentBrand?: string | null;
+  paymentLast4?: string | null;
+  paymentExpMonth?: string | null;
+  paymentExpYear?: string | null;
+}
+
+export interface ProfileRecord {
+  id: string;
+  account_type: AccountType;
+  full_name: string;
+  clinic_name: string | null;
+  phone: string;
+  address_line1: string | null;
+  address_city: string | null;
+  address_district: string | null;
+  address_postal_code: string | null;
+  payment_cardholder_name: string | null;
+  payment_brand: string | null;
+  payment_last4: string | null;
+  payment_exp_month: string | null;
+  payment_exp_year: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface OrderRecord {
+  id: string;
+  status: string;
+  created_at: string;
+  account_type: AccountType;
+  buyer_name: string;
+  clinic_name: string | null;
+  city: string;
+  items: unknown;
 }
 
 export const upsertProfile = async (accessToken: string, payload: ProfilePayload) => {
@@ -158,7 +197,7 @@ export const upsertProfile = async (accessToken: string, payload: ProfilePayload
     {
       method: "POST",
       headers: {
-        Prefer: "resolution=merge-duplicates,return=minimal",
+        Prefer: "resolution=ignore-duplicates,return=minimal",
       },
       body: JSON.stringify([
         {
@@ -167,9 +206,90 @@ export const upsertProfile = async (accessToken: string, payload: ProfilePayload
           full_name: payload.fullName,
           clinic_name: payload.clinicName,
           phone: payload.phone,
+          address_line1: payload.addressLine1 ?? null,
+          address_city: payload.addressCity ?? null,
+          address_district: payload.addressDistrict ?? null,
+          address_postal_code: payload.addressPostalCode ?? null,
+          payment_cardholder_name: payload.paymentCardholderName ?? null,
+          payment_brand: payload.paymentBrand ?? null,
+          payment_last4: payload.paymentLast4 ?? null,
+          payment_exp_month: payload.paymentExpMonth ?? null,
+          payment_exp_year: payload.paymentExpYear ?? null,
         },
       ]),
     },
     accessToken,
   );
+};
+
+export const getProfile = async (accessToken: string, userId: string) => {
+  const encodedUserId = encodeURIComponent(userId);
+  const response = await supabaseRequest(
+    `/rest/v1/profiles?id=eq.${encodedUserId}&select=*`,
+    { method: "GET" },
+    accessToken,
+  );
+  const rows = Array.isArray(response) ? (response as ProfileRecord[]) : [];
+  return rows[0] || null;
+};
+
+interface ProfileUpdatePayload {
+  fullName: string;
+  clinicName: string | null;
+  phone: string;
+  addressLine1: string | null;
+  addressCity: string | null;
+  addressDistrict: string | null;
+  addressPostalCode: string | null;
+  paymentCardholderName: string | null;
+  paymentBrand: string | null;
+  paymentLast4: string | null;
+  paymentExpMonth: string | null;
+  paymentExpYear: string | null;
+}
+
+export const updateProfile = async (
+  accessToken: string,
+  userId: string,
+  payload: ProfileUpdatePayload,
+) => {
+  const encodedUserId = encodeURIComponent(userId);
+  const response = await supabaseRequest(
+    `/rest/v1/profiles?id=eq.${encodedUserId}`,
+    {
+      method: "PATCH",
+      headers: {
+        Prefer: "return=representation",
+      },
+      body: JSON.stringify({
+        full_name: payload.fullName,
+        clinic_name: payload.clinicName,
+        phone: payload.phone,
+        address_line1: payload.addressLine1,
+        address_city: payload.addressCity,
+        address_district: payload.addressDistrict,
+        address_postal_code: payload.addressPostalCode,
+        payment_cardholder_name: payload.paymentCardholderName,
+        payment_brand: payload.paymentBrand,
+        payment_last4: payload.paymentLast4,
+        payment_exp_month: payload.paymentExpMonth,
+        payment_exp_year: payload.paymentExpYear,
+        updated_at: new Date().toISOString(),
+      }),
+    },
+    accessToken,
+  );
+
+  const rows = Array.isArray(response) ? (response as ProfileRecord[]) : [];
+  return rows[0] || null;
+};
+
+export const getOrders = async (accessToken: string, userId: string) => {
+  const encodedUserId = encodeURIComponent(userId);
+  const response = await supabaseRequest(
+    `/rest/v1/orders?user_id=eq.${encodedUserId}&select=id,status,created_at,account_type,buyer_name,clinic_name,city,items&order=created_at.desc`,
+    { method: "GET" },
+    accessToken,
+  );
+  return Array.isArray(response) ? (response as OrderRecord[]) : [];
 };
