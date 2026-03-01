@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/layout/Header";
 import { PaymentMethodSelector, PaymentMethod } from "@/components/checkout/PaymentMethodSelector";
 import { CardInputForm } from "@/components/checkout/CardInputForm";
-import { AddressInput } from "@/components/checkout/AddressInput";
+import { AddressInput, DeliveryDetails } from "@/components/checkout/AddressInput";
 import { OrderSummary } from "@/components/checkout/OrderSummary";
 import { CartItemType } from "@/components/cart/CartItem";
 import { toast } from "sonner";
@@ -14,18 +14,6 @@ import { useCart } from "@/hooks/useCart";
 
 // Get API key from environment or use placeholder
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
-
-interface DeliveryDetails {
-  fullName: string;
-  phone: string;
-  address: string;
-  city: string;
-  district: string;
-  postalCode: string;
-  additionalNotes: string;
-  lat?: number;
-  lng?: number;
-}
 
 interface CardDetails {
   cardNumber: string;
@@ -65,8 +53,16 @@ const Checkout = () => {
   };
 
   const validateDeliveryDetails = () => {
+    if (deliveryDetails?.accountType === "clinic" && !deliveryDetails?.clinicName?.trim()) {
+      toast.error(t("checkout.validation.clinicName"));
+      return false;
+    }
     if (!deliveryDetails?.fullName?.trim()) {
       toast.error(t("checkout.validation.fullName"));
+      return false;
+    }
+    if (!deliveryDetails?.email?.trim() || !deliveryDetails.email.includes("@")) {
+      toast.error(t("checkout.validation.email"));
       return false;
     }
     if (!deliveryDetails?.phone?.trim()) {
@@ -277,7 +273,11 @@ const Checkout = () => {
                       <p className="text-sm text-muted-foreground">
                         {t("checkout.deliverySummary.label")}
                       </p>
+                      {deliveryDetails?.accountType === "clinic" && (
+                        <p className="font-medium">{deliveryDetails.clinicName}</p>
+                      )}
                       <p className="font-medium">{deliveryDetails?.fullName}</p>
+                      <p className="text-sm text-muted-foreground">{deliveryDetails?.email}</p>
                       <p className="text-sm text-muted-foreground">
                         {deliveryDetails?.address}, {deliveryDetails?.district}, {deliveryDetails?.city}
                       </p>

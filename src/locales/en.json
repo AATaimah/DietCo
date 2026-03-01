@@ -123,27 +123,53 @@
   },
   "auth": {
     "title": "Account access",
-    "subtitle": "Login or register your clinic to place and manage orders.",
+    "subtitle": "Login or register as an individual or clinic to place and manage orders.",
+    "accountTypes": {
+      "individual": "Individual",
+      "clinic": "Clinic"
+    },
     "tabs": {
       "login": "Login",
       "register": "Register"
     },
     "fields": {
-      "email": "Work email",
+      "accountType": "Account type",
+      "email": "Email",
+      "workEmail": "Work email",
       "password": "Password",
+      "fullName": "Full name",
+      "contactName": "Contact person name",
       "clinicName": "Clinic name",
       "phone": "Phone number",
       "createPassword": "Create password"
     },
     "placeholders": {
-      "email": "name@clinic.sa",
+      "email": "name@example.com",
+      "workEmail": "name@clinic.sa",
       "password": "••••••••",
+      "fullName": "Your full name",
+      "contactName": "Contact person name",
       "clinicName": "Clinic name",
       "phone": "+966 5X XXX XXXX"
     },
     "actions": {
       "signIn": "Sign in",
       "createAccount": "Create account"
+    },
+    "validation": {
+      "fullName": "Please enter your full name",
+      "contactName": "Please enter the contact person name",
+      "clinicName": "Please enter the clinic name"
+    },
+    "messages": {
+      "requiredFields": "Please complete all required fields",
+      "enterEmailPassword": "Please enter your email and password",
+      "supabaseNotConfigured": "Supabase is not configured yet. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to enable login and registration.",
+      "loginSuccess": "Signed in successfully",
+      "registerSuccess": "Account created successfully",
+      "verifyEmail": "Account created. Please check your email to verify your account.",
+      "loginError": "Unable to sign in. Please try again.",
+      "registerError": "Unable to create account. Please try again."
     }
   },
   "cart": {
@@ -199,11 +225,19 @@
   },
   "address": {
     "title": "Delivery Address",
+    "orderingAs": "Ordering as",
+    "accountTypes": {
+      "individual": "Myself",
+      "clinic": "Clinic"
+    },
     "searchPlaceholder": "Search for your address in Saudi Arabia...",
     "loadingMap": "Loading map...",
     "mapHint": "Click on the map or drag the marker to set your exact delivery location",
     "fields": {
       "fullName": "Full Name *",
+      "contactName": "Contact Person Name *",
+      "clinicName": "Clinic Name *",
+      "email": "Email *",
       "phone": "Phone Number *",
       "address": "Street Address *",
       "city": "City *",
@@ -213,6 +247,9 @@
     },
     "placeholders": {
       "fullName": "Enter your full name",
+      "contactName": "Enter contact person name",
+      "clinicName": "Enter clinic name",
+      "email": "name@example.com",
       "phone": "+966 5x xxx xxxx",
       "address": "Building number, street name",
       "city": "e.g., Riyadh",
@@ -247,7 +284,9 @@
       "label": "Delivering to"
     },
     "validation": {
+      "clinicName": "Please enter the clinic name",
       "fullName": "Please enter your full name",
+      "email": "Please enter a valid email address",
       "phone": "Please enter your phone number",
       "address": "Please enter your address",
       "city": "Please enter your city",
