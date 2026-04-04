@@ -40,6 +40,12 @@ interface PlanOption {
   monthlyPrice: number;
 }
 
+interface OnboardingDraft {
+  answers: Answers;
+  stepIndex: number;
+  selectedPlanId: PlanId;
+}
+
 const AGE_RANGE = {
   min: 18,
   max: 60,
@@ -81,6 +87,83 @@ const CONCERN_HUES: Record<Concern, number> = {
   fertility: 194,
   sexual_health: 24,
 };
+
+const ONBOARDING_STORAGE_KEY = "dietco-onboarding-draft-v1";
+const DEFAULT_ANSWERS: Answers = {
+  age: AGE_RANGE.defaultValue,
+  weight: WEIGHT_RANGE.defaultValue,
+};
+
+function isGender(value: unknown): value is Gender {
+  return value === "female" || value === "male";
+}
+
+function isConcern(value: unknown): value is Concern {
+  return (
+    value === "pcos" ||
+    value === "egg_quality" ||
+    value === "conceive" ||
+    value === "menopause" ||
+    value === "sperm" ||
+    value === "fertility" ||
+    value === "sexual_health"
+  );
+}
+
+function isDuration(value: unknown): value is Duration {
+  return (
+    value === "just_started" ||
+    value === "3_6months" ||
+    value === "6_12months" ||
+    value === "over_year"
+  );
+}
+
+function isPlanId(value: unknown): value is PlanId {
+  return value === "starter" || value === "focused" || value === "complete";
+}
+
+function loadOnboardingDraft(): OnboardingDraft | null {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const raw = window.localStorage.getItem(ONBOARDING_STORAGE_KEY);
+    if (!raw) return null;
+
+    const parsed = JSON.parse(raw) as Partial<OnboardingDraft> & {
+      answers?: Partial<Answers>;
+    };
+
+    const answers: Answers = {
+      age: clamp(Number(parsed.answers?.age ?? DEFAULT_ANSWERS.age), AGE_RANGE.min, AGE_RANGE.max),
+      weight: clamp(
+        Number(parsed.answers?.weight ?? DEFAULT_ANSWERS.weight),
+        WEIGHT_RANGE.min,
+        WEIGHT_RANGE.max,
+      ),
+    };
+
+    if (isGender(parsed.answers?.gender)) answers.gender = parsed.answers.gender;
+    if (isConcern(parsed.answers?.concern)) answers.concern = parsed.answers.concern;
+    if (isDuration(parsed.answers?.duration)) answers.duration = parsed.answers.duration;
+
+    return {
+      answers,
+      stepIndex:
+        typeof parsed.stepIndex === "number" && parsed.stepIndex >= 0
+          ? Math.floor(parsed.stepIndex)
+          : 0,
+      selectedPlanId: isPlanId(parsed.selectedPlanId) ? parsed.selectedPlanId : "focused",
+    };
+  } catch {
+    return null;
+  }
+}
+
+function clearOnboardingDraft() {
+  if (typeof window === "undefined") return;
+  window.localStorage.removeItem(ONBOARDING_STORAGE_KEY);
+}
 
 function getStepIds(answers: Answers): StepId[] {
   const steps: StepId[] = ["gender", "concern", "age", "weight"];
@@ -242,12 +325,10 @@ export default function Onboarding() {
   const { t, locale } = useI18n();
   const { setItems } = useCart();
   const navigate = useNavigate();
-  const [answers, setAnswers] = useState<Answers>({
-    age: AGE_RANGE.defaultValue,
-    weight: WEIGHT_RANGE.defaultValue,
-  });
-  const [stepIndex, setStepIndex] = useState(0);
-  const [selectedPlanId, setSelectedPlanId] = useState<PlanId>("focused");
+  const savedDraft = loadOnboardingDraft();
+  const [answers, setAnswers] = useState<Answers>(savedDraft?.answers ?? DEFAULT_ANSWERS);
+  const [stepIndex, setStepIndex] = useState(savedDraft?.stepIndex ?? 0);
+  const [selectedPlanId, setSelectedPlanId] = useState<PlanId>(savedDraft?.selectedPlanId ?? "focused");
 
   const steps = getStepIds(answers);
   const currentStep = steps[stepIndex];
@@ -272,6 +353,18 @@ export default function Onboarding() {
       setSelectedPlanId(plans.find((plan) => plan.id === "focused")?.id ?? plans[0].id);
     }
   }, [plans, selectedPlanId]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const draft: OnboardingDraft = {
+      answers,
+      stepIndex,
+      selectedPlanId,
+    };
+
+    window.localStorage.setItem(ONBOARDING_STORAGE_KEY, JSON.stringify(draft));
+  }, [answers, stepIndex, selectedPlanId]);
 
   const formatPrice = (price: number, currency: string) =>
     new Intl.NumberFormat(locale, {
@@ -396,6 +489,7 @@ export default function Onboarding() {
       image: product.image,
     }));
 
+    clearOnboardingDraft();
     setItems(cartItems);
     navigate("/checkout", { state: { items: cartItems } });
   }
