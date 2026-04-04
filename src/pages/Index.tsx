@@ -9,6 +9,7 @@ import {
   Clock,
   ClipboardCheck,
   ShieldCheck,
+  Sparkles,
   Truck,
 } from "lucide-react";
 
@@ -41,8 +42,11 @@ const Index = () => {
               {t("home.hero.subtitle")}
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg" variant="clinical">
+              {/* <Button asChild size="lg" variant="clinical">
                 <Link to="/order">{t("home.hero.primaryCta")}</Link>
+              </Button> */}
+              <Button asChild size="lg" variant="clinical">
+                <Link to="/onboarding">{t("home.onboarding.cta")}</Link>
               </Button>
               <Button asChild size="lg" variant="clinical-outline">
                 <Link to="/contact">{t("home.hero.secondaryCta")}</Link>
@@ -149,6 +153,26 @@ const Index = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Onboarding CTA */}
+      <section className="container py-10 md:py-14">
+        <div className="rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-accent/20 border border-primary/20 p-8 md:p-10 flex flex-col md:flex-row items-center gap-6">
+          <div className="flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10">
+            <Sparkles className="h-7 w-7 text-primary" />
+          </div>
+          <div className="flex-1 text-center md:text-start">
+            <h2 className="text-xl font-bold text-foreground mb-1">
+              {t("home.onboarding.title")}
+            </h2>
+            <p className="text-muted-foreground text-base">
+              {t("home.onboarding.subtitle")}
+            </p>
+          </div>
+          <Button asChild size="lg" variant="clinical" className="flex-shrink-0">
+            <Link to="/onboarding">{t("home.onboarding.cta")}</Link>
+          </Button>
         </div>
       </section>
 

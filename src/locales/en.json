@@ -71,6 +71,11 @@
       "subtitle": "Start with the most requested therapies for fertility and specialty care.",
       "cta": "Place Order"
     },
+    "onboarding": {
+      "title": "Not sure where to start?",
+      "subtitle": "Take our 2-minute personalized assessment and get product recommendations tailored to your needs.",
+      "cta": "Find my plan"
+    },
     "footer": {
       "copyright": "© 2026 DietCo. Licensed healthcare marketplace serving Saudi Arabia."
     }
@@ -335,64 +340,144 @@
     "stockCount": "{{count}} in stock",
     "items": {
       "1": {
-        "name": "Gonal-F 75 IU Injection",
-        "packSize": "1 Pre-filled Pen",
-        "description": "Follicle-stimulating hormone (FSH) used in fertility treatment to help stimulate the ovaries and support egg development."
+        "name": "Ovemer Plus",
+        "packSize": "30 Sachets",
+        "description": "Supports fertility and reproductive health. Promotes ovarian health, improves egg quality, and helps regulate menstrual cycles."
       },
       "2": {
-        "name": "Menopur 75 IU",
-        "packSize": "Pack of 5 Vials",
-        "description": "Combination of FSH and LH used in assisted reproduction to promote follicular development and ovulation."
+        "name": "Lino Max",
+        "packSize": "30 Sachets",
+        "description": "Supports ovarian health and hormonal balance. Reduces chronic fatigue and menstrual disorders while enhancing natural energy levels."
       },
       "3": {
-        "name": "Ovidrel 250 mcg",
-        "packSize": "1 Pre-filled Syringe",
-        "description": "hCG trigger injection used to induce final maturation of eggs and support ovulation timing."
+        "name": "Fertalight",
+        "packSize": "30 Sachets",
+        "description": "Stimulates ovulation and treats PCOS. Restores hormonal balance, increases ovarian activity, and acts as an antioxidant to improve egg quality."
       },
       "4": {
-        "name": "Cetrotide 0.25mg",
-        "packSize": "Pack of 7 Injections",
-        "description": "GnRH antagonist used during fertility cycles to prevent premature ovulation."
+        "name": "Reveal Myo-Inositol",
+        "packSize": "30 Sachets",
+        "description": "Regulates menstrual cycles, reduces PCOS symptoms including weight gain and acne, and improves chances of conception."
       },
       "5": {
-        "name": "Progesterone 200mg",
-        "packSize": "Pack of 30 Capsules",
-        "description": "Progesterone support used to prepare and maintain the uterine lining in fertility protocols."
+        "name": "Inovari Plus",
+        "packSize": "30 Sachets",
+        "description": "Contains inositol and folic acid. Supports ovarian health, improves hormonal balance, and regulates menstrual cycles for PCOS."
       },
       "6": {
-        "name": "Estradiol Valerate 2mg",
-        "packSize": "Pack of 28 Tablets",
-        "description": "Estrogen therapy used to support endometrial preparation and hormonal balance."
+        "name": "Inovari",
+        "packSize": "30 Sachets",
+        "description": "Formulated with Myo-Inositol 1000mg and D-Chiro Inositol 25mg. Manages PCOS, improves egg quality, and promotes regular cycles."
       },
       "7": {
-        "name": "Thyroid Levothyroxine 50mcg",
-        "packSize": "Pack of 100 Tablets",
-        "description": "Thyroid hormone replacement used to support normal thyroid function."
+        "name": "Cystol",
+        "packSize": "30 Sachets",
+        "description": "Treats menstrual disorders, helps reduce weight, manages polycystic ovaries, achieves hormonal balance, and increases conception chances."
       },
       "8": {
-        "name": "Folic Acid 5mg",
-        "packSize": "Pack of 90 Tablets",
-        "description": "Folate supplement used to support prenatal health and reduce neural tube defect risk."
+        "name": "Myomed Tabs",
+        "packSize": "30 Tablets",
+        "description": "Delivers 1,250mg Myo-Inositol per tablet. Supports hormonal balance, menstrual regulation, ovarian function, and PCOS management."
       },
       "9": {
-        "name": "Vitamin D3 50,000 IU",
-        "packSize": "Pack of 12 Capsules",
-        "description": "High-dose vitamin D used to correct deficiency and support bone health."
+        "name": "Brooks Fem",
+        "packSize": "30 Sachets",
+        "description": "Treats polycystic ovaries by supporting egg quality. Increases insulin sensitivity, reduces hyperandrogenism, and improves menstrual regularity."
       },
       "10": {
-        "name": "Prenatal Complete",
-        "packSize": "Pack of 60 Softgels",
-        "description": "Comprehensive prenatal multivitamin formulated to support maternal and fetal needs."
+        "name": "Motova C",
+        "packSize": "30 Sachets",
+        "description": "Contains Levocarnitine tartrate, Acetylcarnitine, and Zinc 15mg. Treats PCOS, improves egg quality, and regulates menstrual cycles."
       },
       "11": {
-        "name": "Clexane 40mg",
-        "packSize": "Pack of 10 Syringes",
-        "description": "Low-molecular-weight heparin used to reduce clotting risk under medical supervision."
+        "name": "Qupene",
+        "packSize": "30 Capsules",
+        "description": "Contains Coenzyme Q10 200mg and Lycopene 2000mcg. Increases male fertility, improves sperm count and motility, and supports egg production."
       },
       "12": {
-        "name": "Humira 40mg",
-        "packSize": "2 Pre-filled Pens",
-        "description": "Biologic therapy used for autoimmune conditions; requires cold-chain handling."
+        "name": "Qufix",
+        "packSize": "30 Capsules",
+        "description": "CoQ10 with lycopene for cell division. Supports poor sperm motility, low sperm count, and egg production in women."
+      },
+      "13": {
+        "name": "Q-Cell 200",
+        "packSize": "30 Capsules",
+        "description": "CoQ10 increases male fertility by improving sperm count and motility, and helps women with egg production."
+      },
+      "14": {
+        "name": "Limitless",
+        "packSize": "30 Sachets",
+        "description": "Contains L-arginine, L-carnitine, zinc, selenium, and vitamins C and E. Supports fertility, sexual health, and cell division."
+      },
+      "15": {
+        "name": "Argerekt Plus",
+        "packSize": "26 Sachets",
+        "description": "Advanced dietary supplement for sexual health. Enhances performance, supports prostate health, and improves blood circulation."
+      },
+      "16": {
+        "name": "Prime Ultra",
+        "packSize": "30 Sachets",
+        "description": "L-Carnitine and antioxidants including glutathione. Supports spermatogenesis and improves sperm motility and count."
+      },
+      "17": {
+        "name": "Brox Fort",
+        "packSize": "30 Sachets",
+        "description": "Contains CoQ10, L-carnitine, acetyl L-carnitine, antioxidants, vitamins, and minerals. Specifically formulated to treat weak sperm motility."
+      },
+      "18": {
+        "name": "Forta 6",
+        "packSize": "30 Sachets",
+        "description": "Powdered dietary supplement. Increases sperm count, improves sperm morphology and motility, and helps treat erectile dysfunction."
+      },
+      "19": {
+        "name": "Forta 30",
+        "packSize": "30 Tablets",
+        "description": "Dietary supplement supporting male fertility. Increases sperm count and improves morphology and motility."
+      },
+      "20": {
+        "name": "Supra",
+        "packSize": "120 Capsules",
+        "description": "Contains arginine, Ginkgo biloba, taurine, and maritime pine. Boosts erectile function, improves circulation, and supports overall health."
+      },
+      "21": {
+        "name": "Fertamol",
+        "packSize": "30 Sachets",
+        "description": "Contains L-Carnitine 2300mg, CoQ10 150mg, Glutathione, multivitamins, and minerals. Enhances sperm production and egg quality for both genders."
+      },
+      "22": {
+        "name": "Mega-Q Omega 3",
+        "packSize": "30 Capsules",
+        "description": "Fish oil supplement with Omega-3. Supports fertility in both genders, helps manage triglycerides, and prevents atherosclerosis."
+      },
+      "23": {
+        "name": "Motofa Plus 60",
+        "packSize": "60 Tablets",
+        "description": "L-Carnitine converts fat to energy. Increases fertility in males and females by improving sperm motility and ovulation rates."
+      },
+      "24": {
+        "name": "Motova Plus 30",
+        "packSize": "30 Tablets",
+        "description": "L-Carnitine converts fat to energy. Increases fertility by improving sperm motility, ovulation rates, and egg size."
+      },
+      "25": {
+        "name": "Bedova Powder",
+        "packSize": "30 Sachets",
+        "description": "Increases fertility for both men and women. Contains L-arginine 2000mg, L-carnitine 2000mg, zinc, and antioxidants."
+      },
+      "26": {
+        "name": "Folate One",
+        "packSize": "30 Chewable Tablets",
+        "description": "Chewable tablets with methyl folate and B12. Prevents congenital defects, supports fetal nervous system development, and prevents anemia."
+      },
+      "27": {
+        "name": "Preseez Ovulation Test",
+        "packSize": "2 Pregnancy + 7 Ovulation Tests",
+        "description": "Home ovulation test to boost conception timing. Includes 2 pregnancy tests and 7 ovulation tests."
+      },
+      "28": {
+        "name": "Fem In",
+        "packSize": "30 Sachets",
+        "description": "Contains genistein, Agnus Castus extract, hawthorn, vitamin D3, and calcium. Relieves menopausal symptoms and supports bone health."
       }
     }
   },
@@ -407,11 +492,11 @@
   },
   "categories": {
     "all": "All Products",
-    "ivf": "IVF & Fertility",
-    "hormones": "Hormones",
-    "vitamins": "Vitamins & Supplements",
-    "specialty": "Specialty Medications",
-    "injections": "Injectable Solutions"
+    "female": "Female Fertility",
+    "pcos": "PCOS Treatment",
+    "male": "Male Fertility",
+    "both": "For Both",
+    "prenatal": "Prenatal & Tests"
   },
   "toasts": {
     "updatedQuantity": "Updated {{name}} quantity",
@@ -457,6 +542,123 @@
       "cardLast4Invalid": "Card last 4 must contain exactly 4 digits",
       "cardMonthInvalid": "Expiry month must be between 1 and 12",
       "cardYearInvalid": "Expiry year must be 2 or 4 digits"
+    }
+  },
+  "onboarding": {
+    "back": "Back",
+    "exit": "Exit",
+    "stepOf": "Step {{current}} of {{total}}",
+    "eyebrow": "Let's personalize your plan",
+    "actions": {
+      "continue": "Continue",
+      "continueWithPlan": "Continue with {{name}}",
+      "browseCatalog": "Browse full catalog",
+      "talkToTeam": "Talk to our team"
+    },
+    "preview": {
+      "eyebrow": "Your responses",
+      "title": "The recommendation updates as you go",
+      "subtitle": "Age, weight, and your main goal shape the final monthly options you’ll see at the end.",
+      "panelTitle": "A cleaner, more guided flow",
+      "panelBody": "Choose your goal, adjust age and weight, then review personalized monthly options instead of jumping straight to cart."
+    },
+    "gender": {
+      "title": "Start with the profile that fits you",
+      "subtitle": "We’ll tailor the guidance, product mix, and pricing view to your situation.",
+      "female": "Female",
+      "male": "Male",
+      "female_hint": "Focus on cycle health, egg quality, trying to conceive, or menopause support.",
+      "male_hint": "Focus on sperm quality, fertility support, and sexual health performance.",
+      "optionLabel": "Profile"
+    },
+    "concern": {
+      "title": "What do you want this plan to solve first?",
+      "subtitle": "Pick the main outcome you want to improve and we’ll build around that need.",
+      "optionLabel": "Primary focus",
+      "pcos": "PCOS & Irregular Cycles",
+      "pcos_desc": "Hormonal imbalance, irregular periods, or polycystic ovaries",
+      "egg_quality": "Egg Quality & Fertility",
+      "egg_quality_desc": "Supporting ovarian health and improving egg quality",
+      "conceive": "Trying to Conceive",
+      "conceive_desc": "Actively trying for pregnancy and tracking ovulation",
+      "menopause": "Menopause Support",
+      "menopause_desc": "Managing symptoms of perimenopause or menopause",
+      "sperm": "Sperm Quality & Motility",
+      "sperm_desc": "Improving sperm count, motility, and morphology",
+      "fertility": "Overall Fertility Support",
+      "fertility_desc": "General fertility enhancement and reproductive health",
+      "sexual_health": "Sexual Health & Performance",
+      "sexual_health_desc": "Supporting sexual function, energy, and performance"
+    },
+    "age": {
+      "title": "Dial in your age",
+      "subtitle": "Use the arc to fine-tune how foundational or advanced your monthly support should feel.",
+      "unit": "years",
+      "helper": "This helps us balance foundational support with deeper antioxidant and hormone-focused options.",
+      "minLabel": "{{value}} years",
+      "maxLabel": "{{value}} years"
+    },
+    "weight": {
+      "title": "Add your current weight",
+      "subtitle": "This lets us weight the recommendation toward lighter support or a more targeted monthly stack.",
+      "unit": "kg",
+      "helper": "For goals like PCOS, fertility, or performance, weight can change which products feel most relevant.",
+      "minLabel": "{{value}} kg",
+      "maxLabel": "{{value}} kg"
+    },
+    "duration": {
+      "title": "How long have you been working on this?",
+      "subtitle": "We use this to decide whether to start lighter or show a more comprehensive monthly option.",
+      "optionLabel": "Timeline",
+      "just_started": "Just getting started",
+      "3_6months": "3–6 months",
+      "6_12months": "6–12 months",
+      "over_year": "Over a year"
+    },
+    "results": {
+      "eyebrow": "Your personalized monthly options",
+      "title": "Three ways to move forward",
+      "subtitle": "We matched your answers to a lighter entry plan, a balanced core plan, and a more comprehensive monthly option.",
+      "monthlyLabel": "Monthly estimate",
+      "monthlyFootnote": "Approximate monthly total based on one unit of each included product.",
+      "includesCount": "{{count}} products included",
+      "includedLabel": "What’s included",
+      "includedTitle": "{{name}} includes",
+      "reasonLabel": "Why this fits",
+      "reasonTitle": "How we shaped this recommendation",
+      "disclaimer": "These recommendations are informational only and should not replace clinical advice. Please review with your healthcare provider before starting any supplement.",
+      "summary": {
+        "age": "Age {{value}}",
+        "weight": "{{value}} kg"
+      },
+      "badges": {
+        "starter": "Lighter option",
+        "focused": "Recommended",
+        "complete": "Most complete"
+      },
+      "plans": {
+        "starter": {
+          "name": "Starter",
+          "description": "A lighter monthly option built around the highest-signal essentials."
+        },
+        "focused": {
+          "name": "Focused",
+          "description": "A balanced monthly stack for your main goal with stronger day-to-day coverage."
+        },
+        "complete": {
+          "name": "Complete",
+          "description": "A fuller monthly plan for people who want the deepest support path shown here."
+        }
+      },
+      "reasons": {
+        "focus": "Built around your main focus: {{focus}}.",
+        "ageFoundational": "Your age keeps the recommendation anchored around a more foundational mix.",
+        "ageMature": "Your age shifts the plan toward deeper antioxidant and reproductive support.",
+        "weightBalanced": "Your current weight keeps the mix broad rather than aggressively targeted.",
+        "weightElevated": "Your current weight pushes the plan toward more targeted metabolic and hormone-support options.",
+        "durationEarly": "Because you are earlier in the journey, we kept at least one lighter monthly path available.",
+        "durationLonger": "Because this has been ongoing for longer, we surface more comprehensive monthly options."
+      }
     }
   }
 }

@@ -6,31 +6,31 @@
 
 @layer base {
   :root {
-    /* Healthcare Clinical Palette */
-    --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
+    /* Premium Indigo Palette */
+    --background: 248 30% 98%;
+    --foreground: 240 22% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 240 22% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 240 22% 11%;
 
-    /* Primary: Logo Green */
-    --primary: 79 35% 56%;
+    /* Primary: Vibrant Indigo */
+    --primary: 258 76% 54%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary: Deeper Logo Green */
-    --secondary: 79 30% 47%;
+    /* Secondary: Deeper Indigo */
+    --secondary: 258 62% 44%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Muted: Soft Gray */
-    --muted: 210 15% 95%;
-    --muted-foreground: 215 15% 45%;
+    /* Muted: Soft Lavender-Gray */
+    --muted: 248 22% 93%;
+    --muted-foreground: 240 12% 50%;
 
-    /* Accent: Logo Highlight */
-    --accent: 77 43% 64%;
-    --accent-foreground: 79 30% 20%;
+    /* Accent: Rose */
+    --accent: 335 70% 58%;
+    --accent-foreground: 0 0% 100%;
 
     /* Status Colors */
     --destructive: 0 72% 51%;
@@ -46,50 +46,50 @@
     --info-foreground: 0 0% 100%;
 
     /* Borders & Inputs */
-    --border: 210 20% 90%;
-    --input: 210 20% 90%;
-    --ring: 79 35% 56%;
+    --border: 248 20% 87%;
+    --input: 248 20% 87%;
+    --ring: 258 76% 54%;
 
     --radius: 0.75rem;
 
     /* Sidebar */
     --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 215 25% 25%;
-    --sidebar-primary: 79 35% 56%;
+    --sidebar-foreground: 240 22% 20%;
+    --sidebar-primary: 258 76% 54%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 77 43% 64%;
-    --sidebar-accent-foreground: 79 30% 20%;
-    --sidebar-border: 210 20% 92%;
-    --sidebar-ring: 79 35% 56%;
+    --sidebar-accent: 248 22% 93%;
+    --sidebar-accent-foreground: 240 22% 11%;
+    --sidebar-border: 248 20% 90%;
+    --sidebar-ring: 258 76% 54%;
 
-    /* Custom Healthcare Shadows */
-    --shadow-soft: 0 2px 8px -2px hsl(215 25% 15% / 0.08);
-    --shadow-card: 0 4px 16px -4px hsl(215 25% 15% / 0.1);
-    --shadow-elevated: 0 8px 32px -8px hsl(215 25% 15% / 0.15);
-    --shadow-primary: 0 4px 20px -4px hsl(168 76% 32% / 0.35);
+    /* Shadows */
+    --shadow-soft: 0 2px 8px -2px hsl(258 76% 54% / 0.07);
+    --shadow-card: 0 4px 16px -4px hsl(258 76% 54% / 0.11);
+    --shadow-elevated: 0 8px 32px -8px hsl(258 76% 54% / 0.16);
+    --shadow-primary: 0 4px 20px -4px hsl(258 76% 54% / 0.38);
   }
 
   .dark {
-    --background: 215 25% 10%;
-    --foreground: 210 20% 95%;
+    --background: 240 18% 9%;
+    --foreground: 248 22% 95%;
 
-    --card: 215 25% 13%;
-    --card-foreground: 210 20% 95%;
+    --card: 240 18% 12%;
+    --card-foreground: 248 22% 95%;
 
-    --popover: 215 25% 13%;
-    --popover-foreground: 210 20% 95%;
+    --popover: 240 18% 12%;
+    --popover-foreground: 248 22% 95%;
 
-    --primary: 79 35% 56%;
+    --primary: 258 70% 63%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 79 30% 47%;
+    --secondary: 258 58% 52%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 215 20% 18%;
-    --muted-foreground: 215 15% 60%;
+    --muted: 240 14% 17%;
+    --muted-foreground: 240 12% 60%;
 
-    --accent: 79 30% 22%;
-    --accent-foreground: 77 43% 70%;
+    --accent: 335 62% 62%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 55%;
     --destructive-foreground: 0 0% 100%;
@@ -103,18 +103,18 @@
     --info: 210 70% 60%;
     --info-foreground: 0 0% 100%;
 
-    --border: 215 20% 20%;
-    --input: 215 20% 20%;
-    --ring: 79 35% 56%;
+    --border: 240 14% 20%;
+    --input: 240 14% 20%;
+    --ring: 258 70% 63%;
 
-    --sidebar-background: 215 25% 12%;
-    --sidebar-foreground: 210 20% 90%;
-    --sidebar-primary: 79 35% 56%;
+    --sidebar-background: 240 18% 11%;
+    --sidebar-foreground: 248 22% 90%;
+    --sidebar-primary: 258 70% 63%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 79 30% 22%;
-    --sidebar-accent-foreground: 77 43% 70%;
-    --sidebar-border: 215 20% 18%;
-    --sidebar-ring: 79 35% 56%;
+    --sidebar-accent: 240 14% 17%;
+    --sidebar-accent-foreground: 248 22% 85%;
+    --sidebar-border: 240 14% 18%;
+    --sidebar-ring: 258 70% 63%;
   }
 }
 
