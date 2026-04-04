@@ -40,7 +40,7 @@ export function Header({ cartItemCount, onCartClick, onMenuClick }: HeaderProps)
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
-          <img src="/favicon.ico" alt="DietCo" className="h-9 w-9 rounded-xl" />
+          <img src="/dietco-mark.svg" alt="DietCo" className="h-9 w-9" />
           <span className="font-bold text-xl tracking-tight hidden sm:inline-block">
             DietCo
           </span>

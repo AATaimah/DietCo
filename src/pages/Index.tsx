@@ -247,7 +247,7 @@ const Index = () => {
       <footer className="border-t border-border bg-card">
         <div className="container py-8 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
           <div className="flex items-center gap-3">
-            <img src="/favicon.ico" alt="DietCo" className="h-8 w-8 rounded-lg" />
+            <img src="/dietco-mark.svg" alt="DietCo" className="h-8 w-8" />
             <span className="font-semibold text-foreground">DietCo</span>
           </div>
           <span>{t("home.footer.copyright")}</span>

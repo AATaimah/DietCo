@@ -1,0 +1,12 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dietco-bg" x1="10" y1="8" x2="54" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7056FF"/>
+      <stop offset="1" stop-color="#4B31D6"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="52" height="52" rx="16" fill="url(#dietco-bg)"/>
+  <path d="M24 18V46" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <path d="M24 18H31C39.837 18 46 24.49 46 32C46 39.51 39.837 46 31 46H24" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="42" cy="22" r="3.5" fill="#F46F97"/>
+</svg>

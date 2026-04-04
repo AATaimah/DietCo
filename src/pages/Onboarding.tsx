@@ -42,13 +42,13 @@ interface PlanOption {
 
 const AGE_RANGE = {
   min: 18,
-  max: 52,
+  max: 60,
   defaultValue: 31,
 };
 
 const WEIGHT_RANGE = {
-  min: 45,
-  max: 120,
+  min: 32,
+  max: 180,
   defaultValue: 68,
 };
 
@@ -537,7 +537,6 @@ export default function Onboarding() {
                         unit={t("onboarding.age.unit")}
                         lowLabel={t("onboarding.age.minLabel", { value: AGE_RANGE.min })}
                         highLabel={t("onboarding.age.maxLabel", { value: AGE_RANGE.max })}
-                        hue={concernHue}
                         onChange={(value) => setAnswers((current) => ({ ...current, age: value }))}
                       />
                     </div>
@@ -586,7 +585,6 @@ export default function Onboarding() {
                         unit={t("onboarding.weight.unit")}
                         lowLabel={t("onboarding.weight.minLabel", { value: WEIGHT_RANGE.min })}
                         highLabel={t("onboarding.weight.maxLabel", { value: WEIGHT_RANGE.max })}
-                        hue={concernHue + 20}
                         onChange={(value) => setAnswers((current) => ({ ...current, weight: value }))}
                       />
                     </div>

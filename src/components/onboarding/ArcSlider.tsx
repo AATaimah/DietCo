@@ -9,7 +9,6 @@ interface ArcSliderProps {
   unit: string;
   lowLabel: string;
   highLabel: string;
-  hue?: number;
   className?: string;
   onChange: (value: number) => void;
 }
@@ -57,7 +56,6 @@ export function ArcSlider({
   unit,
   lowLabel,
   highLabel,
-  hue = 258,
   className,
   onChange,
 }: ArcSliderProps) {
@@ -70,9 +68,11 @@ export function ArcSlider({
   const activePath = describeArc(CENTER_X, CENTER_Y, RADIUS, START_ANGLE, currentAngle);
   const trackPath = describeArc(CENTER_X, CENTER_Y, RADIUS, START_ANGLE, END_ANGLE);
   const knob = polarToCartesian(CENTER_X, CENTER_Y, RADIUS, currentAngle);
-  const activeStroke = `hsl(${hue} 72% 54%)`;
-  const glowStroke = `hsl(${hue} 82% 68% / 0.5)`;
-  const trackStroke = `hsl(${hue} 34% 84%)`;
+  const activeStroke = "hsl(var(--primary))";
+  const midStroke = "hsl(var(--secondary))";
+  const glowStroke = "hsl(var(--accent) / 0.45)";
+  const trackStroke = "hsl(var(--muted))";
+  const tickStroke = "hsl(var(--border))";
 
   const updateFromPoint = (clientX: number, clientY: number) => {
     const svg = svgRef.current;
@@ -98,7 +98,7 @@ export function ArcSlider({
   return (
     <div className={cn("space-y-5", className)}>
       <div
-        className="relative overflow-hidden rounded-[32px] border border-white/70 bg-white/75 p-5 shadow-[0_24px_60px_-28px_rgba(74,58,255,0.38)] backdrop-blur-xl"
+        className="relative overflow-hidden rounded-[32px] border border-black/5 bg-white/88 p-5 shadow-[0_22px_50px_-32px_rgba(24,20,44,0.18)] backdrop-blur-md"
         onKeyDown={(event) => {
           if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
             event.preventDefault();
@@ -141,8 +141,8 @@ export function ArcSlider({
           <defs>
             <linearGradient id={sliderId} x1="0%" x2="100%">
               <stop offset="0%" stopColor={glowStroke} />
-              <stop offset="50%" stopColor={activeStroke} />
-              <stop offset="100%" stopColor={`hsl(${hue + 24} 78% 60%)`} />
+              <stop offset="55%" stopColor={activeStroke} />
+              <stop offset="100%" stopColor={midStroke} />
             </linearGradient>
           </defs>
 
@@ -173,7 +173,7 @@ export function ArcSlider({
                 y1={inner.y}
                 x2={outer.x}
                 y2={outer.y}
-                stroke="hsl(240 16% 72%)"
+                stroke={tickStroke}
                 strokeWidth="2"
                 strokeLinecap="round"
               />
