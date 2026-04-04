@@ -198,22 +198,39 @@
   "payment": {
     "title": "طريقة الدفع",
     "methods": {
-      "mada": "بطاقة مدى",
-      "visa": "بطاقة ائتمان/خصم",
-      "mastercard": "بطاقة ائتمان/خصم",
-      "applepay": "سريع وآمن"
+      "cards": "مدى وفيزا وماستركارد عبر صفحة دفع مستضافة وآمنة",
+      "applepay": "دفع سريع عبر Face ID أو Touch ID أو جهاز Apple المرتبط",
+      "stcpay": "محفظة محلية شائعة لعملاء السوق السعودي"
     },
     "methodLabels": {
-      "mada": "مدى",
-      "visa": "فيزا",
-      "mastercard": "ماستركارد",
-      "applepay": "Apple Pay"
+      "cards": "الدفع بالبطاقة",
+      "applepay": "Apple Pay",
+      "stcpay": "STC Pay"
     },
     "applePay": {
       "title": "Apple Pay",
-      "description": "سيُطلب منك تأكيد الدفع عبر Face ID أو Touch ID"
+      "description": "سيُطلب منك تأكيد الدفع عبر Face ID أو Touch ID",
+      "desktopTitle": "تحويل Apple Pay من سطح المكتب",
+      "desktopDescription": "في المتصفحات المكتبية المدعومة، يمكن لـ Apple Pay تحويل الدفع إلى iPhone لتتمكن من المسح والتأكيد هناك."
     },
     "secureNotice": "معلومات الدفع مشفّرة وآمنة",
+    "securePanel": {
+      "title": "{{method}}",
+      "descriptions": {
+        "applepay": "استخدم Apple Pay لتجربة دفع أسرع عندما يكون متاحًا على جهازك ومتصفحك.",
+        "cards": "يمكن للعملاء الدفع عبر مدى أو فيزا أو ماستركارد باستخدام حقول دفع مستضافة من مزود الدفع.",
+        "stcpay": "أضف خيارًا محليًا قويًا للعملاء في السعودية الذين يفضلون STC Pay."
+      },
+      "handledBy": "تنفيذ الدفع",
+      "hostedFields": "يتم عبر مزود الدفع",
+      "partnerBody": "يتابع الدفع مع شريك الدفع الآمن بعد تأكيد هذه الخطوة.",
+      "supported": "التدفق المدعوم",
+      "cardsSupported": "مدى وفيزا وماستركارد",
+      "stcpaySupported": "تحويل إلى محفظة STC Pay",
+      "applePaySupported": "Apple Pay على أجهزة Apple المدعومة وتحويلات سطح المكتب",
+      "complianceTitle": "لا تجمع بيانات البطاقة الخام بنفسك",
+      "complianceBody": "في الدفع المباشر، يجب أن يلتقط مزود الدفع بيانات البطاقة عبر حقول مستضافة أو صفحة دفع مستضافة."
+    },
     "fields": {
       "cardholderName": "اسم حامل البطاقة",
       "cardNumber": "رقم البطاقة",
@@ -279,14 +296,18 @@
     },
     "trust": {
       "secure": "دفع آمن",
-      "sameDay": "توصيل في نفس اليوم",
-      "cutoff": "اطلب قبل الساعة 2 ظهرًا"
+      "sameDay": "توصيل سريع",
+      "vatIncluded": "عرض واضح لضريبة القيمة المضافة"
     },
     "actions": {
-      "continueToPayment": "المتابعة إلى الدفع"
+      "continueToPayment": "المتابعة إلى الدفع",
+      "continueToSecurePayment": "المتابعة إلى الدفع الآمن"
     },
     "messages": {
       "orderSaveFailed": "تم الدفع بنجاح، لكن تعذر حفظ الطلب. يرجى التواصل مع الدعم."
+    },
+    "processing": {
+      "subtitle": "جارٍ حفظ الطلب وتجهيز خطوة الدفع التالية."
     },
     "deliverySummary": {
       "label": "التوصيل إلى"
@@ -305,8 +326,8 @@
       "cardholderName": "يرجى إدخال اسم حامل البطاقة"
     },
     "confirmation": {
-      "title": "تم تأكيد الطلب!",
-      "subtitle": "شكرًا لطلبك. سنرسل بريدًا للتأكيد مع تفاصيل التتبع.",
+      "title": "تم استلام الطلب",
+      "subtitle": "شكرًا لطلبك. سنرسل بريدًا للتأكيد مع التفاصيل.",
       "detailsTitle": "تفاصيل الطلب",
       "orderNumber": "رقم الطلب",
       "deliveryAddress": "عنوان التوصيل",

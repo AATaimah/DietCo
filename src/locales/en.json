@@ -198,22 +198,39 @@
   "payment": {
     "title": "Payment Method",
     "methods": {
-      "mada": "Saudi debit card",
-      "visa": "Credit/Debit card",
-      "mastercard": "Credit/Debit card",
-      "applepay": "Fast & secure"
+      "cards": "mada, Visa, and Mastercard through a secure hosted checkout",
+      "applepay": "Fast checkout with Face ID, Touch ID, or your linked Apple device",
+      "stcpay": "Popular local wallet for Saudi customers"
     },
     "methodLabels": {
-      "mada": "Mada",
-      "visa": "Visa",
-      "mastercard": "Mastercard",
-      "applepay": "Apple Pay"
+      "cards": "Pay by card",
+      "applepay": "Apple Pay",
+      "stcpay": "STC Pay"
     },
     "applePay": {
       "title": "Apple Pay",
-      "description": "You'll be prompted to confirm payment with Face ID or Touch ID"
+      "description": "You'll be prompted to confirm payment with Face ID or Touch ID",
+      "desktopTitle": "Desktop Apple Pay handoff",
+      "desktopDescription": "On supported desktop browsers, Apple Pay can hand off payment to your iPhone so you can scan and confirm there."
     },
     "secureNotice": "Your payment information is encrypted and secure",
+    "securePanel": {
+      "title": "{{method}}",
+      "descriptions": {
+        "applepay": "Use Apple Pay for the fastest checkout experience when it is available on your browser and device.",
+        "cards": "Customers can pay with mada, Visa, or Mastercard using provider-hosted payment fields.",
+        "stcpay": "Offer a strong local payment option for Saudi customers who prefer STC Pay."
+      },
+      "handledBy": "Payment capture",
+      "hostedFields": "Handled by the payment provider",
+      "partnerBody": "Your payment continues with our secure payment partner after you confirm this step.",
+      "supported": "Supported flow",
+      "cardsSupported": "mada, Visa, and Mastercard",
+      "stcpaySupported": "STC Pay wallet handoff",
+      "applePaySupported": "Apple Pay on supported Apple devices and desktop handoff flows",
+      "complianceTitle": "Do not collect raw card details yourself",
+      "complianceBody": "For live checkout, card details should be captured by hosted fields or a hosted payment page from your payment provider."
+    },
     "fields": {
       "cardholderName": "Cardholder Name",
       "cardNumber": "Card Number",
@@ -279,14 +296,18 @@
     },
     "trust": {
       "secure": "Secure Checkout",
-      "sameDay": "Same Day Delivery",
-      "cutoff": "Order Before 2 PM"
+      "sameDay": "Expedited Delivery",
+      "vatIncluded": "VAT shown clearly"
     },
     "actions": {
-      "continueToPayment": "Continue to Payment"
+      "continueToPayment": "Continue to Payment",
+      "continueToSecurePayment": "Continue to Secure Payment"
     },
     "messages": {
       "orderSaveFailed": "Payment succeeded, but we could not save your order. Please contact support."
+    },
+    "processing": {
+      "subtitle": "Saving your order and preparing the next payment step."
     },
     "deliverySummary": {
       "label": "Delivering to"
@@ -305,7 +326,7 @@
       "cardholderName": "Please enter the cardholder name"
     },
     "confirmation": {
-      "title": "Order Confirmed!",
+      "title": "Order Received",
       "subtitle": "Thank you for your order. We'll send you a confirmation email with tracking details.",
       "detailsTitle": "Order Details",
       "orderNumber": "Order Number",

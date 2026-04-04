@@ -1,8 +1,8 @@
-import { CreditCard, Smartphone } from "lucide-react";
+import { CreditCard, Smartphone, Wallet } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/i18n";
 
-export type PaymentMethod = "mada" | "visa" | "mastercard" | "applepay";
+export type PaymentMethod = "applepay" | "cards" | "stcpay";
 
 interface PaymentMethodSelectorProps {
   selectedMethod: PaymentMethod | null;
@@ -11,47 +11,45 @@ interface PaymentMethodSelectorProps {
 
 const paymentMethods = [
   {
-    id: "mada" as PaymentMethod,
-    name: "Mada",
-    descriptionKey: "payment.methods.mada",
-    logo: (
-      <div className="w-12 h-8 bg-gradient-to-r from-[#004D40] to-[#00796B] rounded flex items-center justify-center">
-        <span className="text-white font-bold text-xs">mada</span>
-      </div>
-    ),
-  },
-  {
-    id: "visa" as PaymentMethod,
-    name: "Visa",
-    descriptionKey: "payment.methods.visa",
-    logo: (
-      <div className="w-12 h-8 bg-gradient-to-r from-[#1A1F71] to-[#2D4AA8] rounded flex items-center justify-center">
-        <span className="text-white font-bold text-xs italic">VISA</span>
-      </div>
-    ),
-  },
-  {
-    id: "mastercard" as PaymentMethod,
-    name: "Mastercard",
-    descriptionKey: "payment.methods.mastercard",
-    logo: (
-      <div className="w-12 h-8 bg-foreground/5 rounded flex items-center justify-center">
-        <div className="flex -space-x-2">
-          <div className="w-4 h-4 rounded-full bg-[#EB001B]" />
-          <div className="w-4 h-4 rounded-full bg-[#F79E1B]" />
-        </div>
-      </div>
-    ),
-  },
-  {
     id: "applepay" as PaymentMethod,
-    name: "Apple Pay",
+    labelKey: "payment.methodLabels.applepay",
     descriptionKey: "payment.methods.applepay",
-    logo: (
-      <div className="w-12 h-8 bg-foreground rounded flex items-center justify-center">
-        <Smartphone className="w-4 h-4 text-background" />
+    badge: (
+      <div className="flex h-11 min-w-[68px] items-center justify-center rounded-xl bg-black px-3 text-sm font-semibold text-white">
+        Apple Pay
       </div>
     ),
+    icon: Smartphone,
+  },
+  {
+    id: "cards" as PaymentMethod,
+    labelKey: "payment.methodLabels.cards",
+    descriptionKey: "payment.methods.cards",
+    badge: (
+      <div className="flex items-center gap-1.5">
+        <span className="rounded-full bg-[#00A3AD] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
+          mada
+        </span>
+        <span className="rounded-full border border-border bg-white px-2.5 py-1 text-[11px] font-semibold text-[#1A1F71]">
+          Visa
+        </span>
+        <span className="rounded-full border border-border bg-white px-2.5 py-1 text-[11px] font-semibold text-[#EB001B]">
+          MC
+        </span>
+      </div>
+    ),
+    icon: CreditCard,
+  },
+  {
+    id: "stcpay" as PaymentMethod,
+    labelKey: "payment.methodLabels.stcpay",
+    descriptionKey: "payment.methods.stcpay",
+    badge: (
+      <div className="flex h-11 min-w-[68px] items-center justify-center rounded-xl bg-[#4f008c] px-3 text-sm font-semibold text-white">
+        stc pay
+      </div>
+    ),
+    icon: Wallet,
   },
 ];
 
@@ -62,44 +60,53 @@ export function PaymentMethodSelector({
   const { t } = useI18n();
 
   return (
-    <div className="space-y-3">
-      <h3 className="font-semibold text-foreground flex items-center gap-2">
+    <div className="space-y-4">
+      <h3 className="flex items-center gap-2 font-semibold text-foreground">
         <CreditCard className="h-5 w-5 text-primary" />
         {t("payment.title")}
       </h3>
-      
-      <div className="grid grid-cols-2 gap-3">
-        {paymentMethods.map((method) => (
-          <button
-            key={method.id}
-            type="button"
-            onClick={() => onSelect(method.id)}
-            className={cn(
-              "flex items-center gap-3 p-4 rounded-xl border-2 transition-all text-left",
-              selectedMethod === method.id
-                ? "border-primary bg-primary/5"
-                : "border-border hover:border-primary/30 hover:bg-muted/50"
-            )}
-          >
-            {method.logo}
-            <div className="flex-1 min-w-0">
-              <p className="font-medium text-sm text-foreground">{method.name}</p>
-              <p className="text-xs text-muted-foreground">{t(method.descriptionKey)}</p>
-            </div>
-            <div
+
+      <div className="space-y-3">
+        {paymentMethods.map((method) => {
+          const Icon = method.icon;
+
+          return (
+            <button
+              key={method.id}
+              type="button"
+              onClick={() => onSelect(method.id)}
               className={cn(
-                "w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0",
+                "flex w-full items-center gap-4 rounded-2xl border p-4 text-left transition-all",
                 selectedMethod === method.id
-                  ? "border-primary bg-primary"
-                  : "border-muted-foreground/30"
+                  ? "border-primary bg-primary/5 shadow-[0_18px_45px_-36px_rgba(74,58,255,0.32)]"
+                  : "border-border bg-card hover:border-primary/25 hover:bg-muted/30",
               )}
             >
-              {selectedMethod === method.id && (
-                <div className="w-2 h-2 rounded-full bg-primary-foreground" />
-              )}
-            </div>
-          </button>
-        ))}
+              <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl bg-primary/8 text-primary">
+                <Icon className="h-5 w-5" />
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <p className="font-medium text-sm text-foreground">{t(method.labelKey)}</p>
+                <p className="mt-1 text-xs text-muted-foreground">{t(method.descriptionKey)}</p>
+                <div className="mt-3">{method.badge}</div>
+              </div>
+
+              <div
+                className={cn(
+                  "flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full border-2",
+                  selectedMethod === method.id
+                    ? "border-primary bg-primary"
+                    : "border-muted-foreground/30",
+                )}
+              >
+                {selectedMethod === method.id ? (
+                  <div className="h-2 w-2 rounded-full bg-primary-foreground" />
+                ) : null}
+              </div>
+            </button>
+          );
+        })}
       </div>
     </div>
   );

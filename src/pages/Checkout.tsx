@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ArrowLeft, ShieldCheck, Truck, Clock, CheckCircle } from "lucide-react";
+import { ArrowLeft, ShieldCheck, Truck, Clock, CheckCircle, BadgeInfo } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/layout/Header";
 import { PaymentMethodSelector, PaymentMethod } from "@/components/checkout/PaymentMethodSelector";
@@ -16,13 +16,6 @@ import { createOrder, getProfile } from "@/lib/supabase";
 
 // Get API key from environment or use placeholder
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || "";
-
-interface CardDetails {
-  cardNumber: string;
-  expiryDate: string;
-  cvv: string;
-  cardholderName: string;
-}
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -47,11 +40,13 @@ const Checkout = () => {
   const [prefillDeliveryDetails, setPrefillDeliveryDetails] = useState<Partial<DeliveryDetails> | undefined>(
     undefined,
   );
-  const [cardDetails, setCardDetails] = useState<CardDetails | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [processingStage, setProcessingStage] = useState<"idle" | "processing" | "success">("idle");
   const [step, setStep] = useState<"details" | "payment" | "confirmation">("details");
   const [placedOrderId, setPlacedOrderId] = useState<string | null>(null);
+  const isDesktopApplePayFlow = useMemo(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(min-width: 1024px)").matches;
+  }, []);
   const paymentMethodLabel = selectedPaymentMethod
     ? t(`payment.methodLabels.${selectedPaymentMethod}`)
     : "";
@@ -160,24 +155,6 @@ const Checkout = () => {
       toast.error(t("checkout.validation.paymentMethod"));
       return false;
     }
-    if (selectedPaymentMethod !== "applepay") {
-      if (!cardDetails?.cardNumber || cardDetails.cardNumber.replace(/\s/g, "").length < 16) {
-        toast.error(t("checkout.validation.cardNumber"));
-        return false;
-      }
-      if (!cardDetails?.expiryDate || cardDetails.expiryDate.length < 5) {
-        toast.error(t("checkout.validation.expiryDate"));
-        return false;
-      }
-      if (!cardDetails?.cvv || cardDetails.cvv.length < 3) {
-        toast.error(t("checkout.validation.cvv"));
-        return false;
-      }
-      if (!cardDetails?.cardholderName?.trim()) {
-        toast.error(t("checkout.validation.cardholderName"));
-        return false;
-      }
-    }
     return true;
   };
 
@@ -191,10 +168,6 @@ const Checkout = () => {
     if (!validatePaymentDetails() || !deliveryDetails) return;
 
     setIsProcessing(true);
-    setProcessingStage("processing");
-    
-    // Simulate payment processing
-    await new Promise((resolve) => setTimeout(resolve, 1200));
 
     try {
       const order = await createOrder(session?.accessToken, {
@@ -213,6 +186,7 @@ const Checkout = () => {
         postalCode: deliveryDetails.postalCode.trim() || null,
         additionalNotes: deliveryDetails.additionalNotes.trim() || null,
         items,
+        status: "pending",
       });
 
       if (!order) {
@@ -224,15 +198,10 @@ const Checkout = () => {
       const message = error instanceof Error ? error.message : t("checkout.messages.orderSaveFailed");
       toast.error(message);
       setIsProcessing(false);
-      setProcessingStage("idle");
       return;
     }
 
-    setProcessingStage("success");
-    await new Promise((resolve) => setTimeout(resolve, 900));
-
     setIsProcessing(false);
-    setProcessingStage("idle");
     setStep("confirmation");
     setItems([]);
     toast.success(t("checkout.confirmation.toast"));
@@ -319,29 +288,16 @@ const Checkout = () => {
             <div className="w-full max-w-md rounded-2xl border border-border bg-card p-8 text-center shadow-elevated animate-scale-in">
               <div className="relative mx-auto mb-5 h-20 w-20">
                 <div className="absolute inset-0 rounded-full bg-primary/10 animate-pulse-soft" />
-                {processingStage === "processing" ? (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-10 w-10 rounded-full border-[3px] border-primary border-t-transparent animate-spin" />
-                  </div>
-                ) : (
-                  <>
-                    <div className="absolute inset-0 rounded-full bg-success/15 animate-ping" />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="h-14 w-14 rounded-full bg-success/10 flex items-center justify-center animate-scale-in">
-                        <CheckCircle className="h-8 w-8 text-success" />
-                      </div>
-                    </div>
-                  </>
-                )}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="h-10 w-10 rounded-full border-[3px] border-primary border-t-transparent animate-spin" />
+                </div>
               </div>
 
               <h3 className="text-xl font-semibold mb-2">
-                {processingStage === "processing"
-                  ? t("common.processing")
-                  : t("checkout.confirmation.title")}
+                {t("common.processing")}
               </h3>
               <p className="text-sm text-muted-foreground">
-                {t("checkout.confirmation.subtitle")}
+                {t("checkout.processing.subtitle")}
               </p>
             </div>
           </div>
@@ -395,7 +351,7 @@ const Checkout = () => {
                 />
 
                 {/* Trust Indicators */}
-                <div className="flex flex-wrap gap-4 p-4 bg-accent/30 rounded-xl">
+                <div className="flex flex-wrap gap-4 rounded-xl bg-accent/30 p-4">
                   <div className="flex items-center gap-2 text-sm">
                     <ShieldCheck className="h-4 w-4 text-primary" />
                     <span>{t("checkout.trust.secure")}</span>
@@ -405,8 +361,8 @@ const Checkout = () => {
                     <span>{t("checkout.trust.sameDay")}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm">
-                    <Clock className="h-4 w-4 text-primary" />
-                    <span>{t("checkout.trust.cutoff")}</span>
+                    <BadgeInfo className="h-4 w-4 text-primary" />
+                    <span>{t("checkout.trust.vatIncluded")}</span>
                   </div>
                 </div>
 
@@ -452,11 +408,10 @@ const Checkout = () => {
                   onSelect={setSelectedPaymentMethod}
                 />
 
-                {/* Card Input */}
                 {selectedPaymentMethod && (
                   <CardInputForm
                     paymentMethod={selectedPaymentMethod}
-                    onChange={setCardDetails}
+                    isDesktopApplePayFlow={isDesktopApplePayFlow}
                   />
                 )}
 
@@ -473,7 +428,7 @@ const Checkout = () => {
                       {t("common.processing")}
                     </span>
                   ) : (
-                    t("common.placeOrder")
+                    t("checkout.actions.continueToSecurePayment")
                   )}
                 </Button>
               </>

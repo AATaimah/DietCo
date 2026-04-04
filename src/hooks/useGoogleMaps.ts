@@ -36,30 +36,78 @@ export function useGoogleMaps({ apiKey, onLocationSelect }: UseGoogleMapsProps) 
       return;
     }
 
+    const googleMapsWindow = window as Window & {
+      google?: any;
+      gm_authFailure?: () => void;
+      __dietcoGoogleMapsReady__?: () => void;
+    };
+    const existingScript = document.getElementById("dietco-google-maps-script") as HTMLScriptElement | null;
+    let timeoutId: number | undefined;
+
+    const markLoadFailed = () => {
+      setError(t("address.errors.loadFailed"));
+      setIsLoaded(false);
+    };
+
+    const markLoaded = () => {
+      if (googleMapsWindow.google?.maps?.places) {
+        setError(null);
+        setIsLoaded(true);
+        return;
+      }
+
+      markLoadFailed();
+    };
+
     // Check if already loaded
-    if ((window as any).google?.maps) {
+    if (googleMapsWindow.google?.maps?.places) {
+      setError(null);
       setIsLoaded(true);
       return;
     }
 
-    // Load Google Maps script
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places,geometry`;
-    script.async = true;
-    script.defer = true;
-    
-    script.onload = () => {
-      setIsLoaded(true);
-    };
-    
-    script.onerror = () => {
-      setError(t("address.errors.loadFailed"));
-    };
+    googleMapsWindow.__dietcoGoogleMapsReady__ = markLoaded;
+    googleMapsWindow.gm_authFailure = markLoadFailed;
 
-    document.head.appendChild(script);
+    if (existingScript) {
+      existingScript.addEventListener("load", markLoaded);
+      existingScript.addEventListener("error", markLoadFailed);
+    } else {
+      const script = document.createElement("script");
+      script.id = "dietco-google-maps-script";
+      script.src =
+        `https://maps.googleapis.com/maps/api/js?key=${apiKey}` +
+        `&libraries=places,geometry&loading=async&callback=__dietcoGoogleMapsReady__`;
+      script.async = true;
+      script.defer = true;
+
+      script.onerror = markLoadFailed;
+      document.head.appendChild(script);
+    }
+
+    timeoutId = window.setTimeout(() => {
+      if (!googleMapsWindow.google?.maps?.places) {
+        markLoadFailed();
+      }
+    }, 10000);
 
     return () => {
-      // Cleanup if needed
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+
+      if (existingScript) {
+        existingScript.removeEventListener("load", markLoaded);
+        existingScript.removeEventListener("error", markLoadFailed);
+      }
+
+      if (googleMapsWindow.__dietcoGoogleMapsReady__ === markLoaded) {
+        delete googleMapsWindow.__dietcoGoogleMapsReady__;
+      }
+
+      if (googleMapsWindow.gm_authFailure === markLoadFailed) {
+        delete googleMapsWindow.gm_authFailure;
+      }
     };
   }, [apiKey, t]);
 
